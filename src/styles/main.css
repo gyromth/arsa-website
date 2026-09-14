@@ -783,7 +783,13 @@ html.html--booting body { visibility: hidden; }
 
 .reach-flight__plane {
   color: currentColor;
-  filter: drop-shadow(0 3px 6px rgba(37, 99, 235, 0.35));
+  filter: drop-shadow(0 3px 7px rgba(37, 99, 235, 0.4));
+}
+
+/* Explicit fill: the svg root carries fill="none" which would otherwise be
+   inherited and make the plane invisible */
+.reach-flight__plane path {
+  fill: currentColor;
 }
 
 @media (max-width: 959px) {
@@ -794,7 +800,7 @@ html.html--booting body { visibility: hidden; }
   /* Existing Global Reach globe svg is desktop-hidden: replaced by flight arc */
   .connecting .connecting__visual { display: none; }
 
-  /* Compact two-column composition: text left, small flight right.
+  /* Compact two-column composition: centered text left, small flight right.
      Section no longer stretches — vertical padding is reduced. */
   .connecting__inner {
     display: grid;
@@ -802,23 +808,25 @@ html.html--booting body { visibility: hidden; }
     justify-content: center;
     gap: clamp(1.5rem, 1rem + 3.5vw, 5rem);
     align-items: center;
-    text-align: left;
     padding: clamp(3rem, 2.5rem + 2.5vw, 4.5rem) 0;
   }
 
   .connecting__label,
   .connecting__title,
-  .connecting__text { grid-column: 1; }
+  .connecting__text {
+    grid-column: 1;
+    text-align: center;
+  }
 
   .connecting__title {
     max-width: none;
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .connecting__text {
     max-width: 42ch;
-    margin-left: 0;
+    margin: 0 auto;
   }
 
   .reach-flight {
