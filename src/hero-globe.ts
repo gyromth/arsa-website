@@ -1,7 +1,7 @@
 // ── Hero interactive globe ─────────────────────────────────
 // Orthographic SVG globe rendered in JS from simplified Natural Earth data.
-// Drag (mouse/touch) rotates the view; scroll progress drives the sequential
-// route reveal forward/reverse with a fixed resting state — no idle loops.
+// Drag (mouse/touch) rotates the view freely by 360°; demo flights play as a
+// sequential route sequence while the hero is on screen (no idle CPU work).
 import {
   LAND_RING_FLAT,
   LAND_RING_SPLITS,
@@ -15,9 +15,10 @@ const CY = 300;
 const D2R = Math.PI / 180;
 const BASE_LON0 = 45; // deg, view center longitude at load
 const BASE_LAT0 = 15; // deg, view center latitude at load
-const LON_WINDOW = 120; // drag window (deg) around base longitude
-const LAT_WINDOW = 26; // drag window (deg) around base latitude
+const LAT_WINDOW = 24; // gentle vertical drag window (deg)
 const ROUTE_SAMPLES = 44;
+const ROUTE_DRAW_MS = 3000; // route draw duration
+const ROUTE_HOLD_MS = 1100; // pause between routes
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 interface ProjectedPoint {
@@ -150,9 +151,7 @@ export function initHeroGlobe(): void {
   if (!window.matchMedia('(min-width: 960px)').matches) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const hint = wrap.querySelector<HTMLElement>('.hero-globe__hint');
 
-  // Build runtime elements once.
   const routes: SVGPathElement[] = [];
   const planes: SVGGElement[] = [];
   for (let i = 0; i < ROUTE_PAIRS.length; i++) {
@@ -180,12 +179,12 @@ export function initHeroGlobe(): void {
     pointEls.push(halo, core);
   }
 
-  // Rotation state (degrees around the base view)
+  // Free 360° rotation: lonOffset is unbounded; sin/cos are periodic so the
+  // projection stays continuous across the ±180° wrap without jumps.
   const view = { lon: 0, lat: 0 };
   const lengths: number[] = [];
   const routePts: (ProjectedPoint | null)[][] = [];
 
-  let renderQueued = false;
   const renderSync = (): void => {
     const lon0 = BASE_LON0 + view.lon;
     const lat0 = BASE_LAT0 + view.lat;
@@ -238,89 +237,135 @@ export function initHeroGlobe(): void {
     }
   };
 
+  let renderQueued = false;
   const render = (): void => {
     if (renderQueued) return;
     renderQueued = true;
     requestAnimationFrame(() => {
       renderQueued = false;
       renderSync();
-      drawRoute(currentProgress);
+      drawActive();
     });
   };
 
-  // ── Scroll-driven route reveal ──
-  let currentProgress = 0;
-  let scrollQueued = false;
+  const hint = wrap.querySelector<HTMLElement>('.hero-globe__hint');
 
-  const drawRoute = (p: number): void => {
-    if (prefersReduced) return;
-    const total = routes.length;
-    const idx = Math.min(total - 1, Math.floor(p * total));
-    const local = Math.min(1, Math.max(0, p * total - idx));
+  // ── Sequential demo flights A → B (rAF only while the hero is visible) ──
+  let activeIdx = 0;
+  let tPhase = 'draw';
+  let tPhaseT = 0;
+  let seqRaf = 0;
+  let seqLast = 0;
+  let heroVisible = true;
+
+  const drawActive = (): void => {
+    const t = tPhase === 'draw' ? Math.min(1, tPhaseT) : 1;
     routes.forEach((r, i) => {
-      if (i === idx) {
-        const drawP = Math.min(1, local / 0.78);
-        const L = lengths[i] || 1;
-        r.style.strokeDasharray = String(L);
-        r.style.strokeDashoffset = String(L * (1 - drawP));
-        r.style.opacity = local > 0.8 ? String(Math.max(0, 1 - (local - 0.8) / 0.2)) : '1';
-        const plane = planes[i];
-        if (local < 0.78 && routePts[i] && routePts[i].length > 2) {
-          const t = drawP * (routePts[i].length - 1);
-          const i0 = Math.max(0, Math.min(routePts[i].length - 2, Math.floor(t)));
-          const pt = routePts[i][i0];
-          const pt2 = routePts[i][i0 + 1];
-          if (pt && pt2) {
-            const ang = (Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180) / Math.PI;
-            plane.setAttribute(
-              'transform',
-              `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)}) rotate(${(ang + 90).toFixed(1)})`,
-            );
-            plane.style.opacity = '1';
-          }
+      const L = lengths[i];
+      if (i !== activeIdx) {
+        r.style.opacity = '0';
+        planes[i].style.opacity = '0';
+        return;
+      }
+      if (!L) {
+        // partial route (poles not both on the visible hemisphere):
+        // keep visible segments steady, no animated plane
+        r.style.strokeDasharray = 'none';
+        r.style.strokeDashoffset = '0';
+        r.style.opacity = '0.5';
+        planes[i].style.opacity = '0';
+        return;
+      }
+      r.style.strokeDasharray = String(L);
+      r.style.strokeDashoffset = String(L * (1 - t));
+      r.style.opacity = tPhase === 'hold' ? '0.55' : '0.95';
+      const plane = planes[i];
+      const samples = routePts[i];
+      if (plane && samples && samples.length > 2) {
+        const ti = t * (samples.length - 1);
+        const i0 = Math.max(0, Math.min(samples.length - 2, Math.floor(ti)));
+        const pt = samples[i0];
+        const pt2 = samples[i0 + 1];
+        if (pt && pt2) {
+          const ang = (Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180) / Math.PI;
+          plane.setAttribute(
+            'transform',
+            `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)}) rotate(${(ang + 90).toFixed(1)})`,
+          );
+          plane.style.opacity = '1';
         } else {
           plane.style.opacity = '0';
         }
-      } else {
-        r.style.opacity = '0';
-        planes[i].style.opacity = '0';
       }
     });
   };
 
-  const onScroll = (): void => {
-    if (scrollQueued) return;
-    scrollQueued = true;
-    requestAnimationFrame(() => {
-      scrollQueued = false;
-      const rect = section.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-      // Hero is the first screen: progress starts at 0 on load and reaches 1
-      // as the hero scrolls out of the viewport.
-      currentProgress = Math.min(1, Math.max(0, -rect.top / (vh * 0.92)));
-      world.style.transform = `rotate(${(-10 + 12 * currentProgress).toFixed(2)}deg)`;
-      drawRoute(currentProgress);
-    });
+  const seqStep = (now: number): void => {
+    if (!heroVisible) {
+      seqRaf = 0;
+      return;
+    }
+    const dt = Math.min(64, now - seqLast);
+    seqLast = now;
+    if (tPhase === 'draw') {
+      tPhaseT += dt / ROUTE_DRAW_MS;
+      if (tPhaseT >= 1) {
+        tPhaseT = 1;
+        tPhase = 'hold';
+      }
+    } else {
+      tPhaseT += dt / ROUTE_HOLD_MS;
+      if (tPhaseT >= 1) {
+        tPhase = 'draw';
+        tPhaseT = 0;
+        activeIdx = (activeIdx + 1) % routes.length;
+        routes.forEach((r, i) => {
+          if (i !== activeIdx) r.style.opacity = '0';
+        });
+      }
+    }
+    drawActive();
+    seqRaf = requestAnimationFrame(seqStep);
   };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  onScroll();
+
+  const startSeq = (): void => {
+    if (seqRaf || prefersReduced) return;
+    seqLast = performance.now();
+    seqRaf = requestAnimationFrame(seqStep);
+  };
+  const stopSeq = (): void => {
+    if (seqRaf) cancelAnimationFrame(seqRaf);
+    seqRaf = 0;
+  };
+
+  renderSync();
 
   if (prefersReduced) {
-    // Static beautiful globe: several routes drawn, no planes, no drag motion
-    renderSync();
+    // Static premium globe: several routes drawn, no planes, no motion.
     routes.forEach((r, i) => {
       r.style.strokeDasharray = 'none';
       r.style.strokeDashoffset = '0';
-      if (i < 3) {
-        r.style.opacity = String(0.85 - i * 0.25);
-      }
+      if (i < 3) r.style.opacity = String(0.8 - i * 0.22);
     });
     planes.forEach((m) => (m.style.opacity = '0'));
     return;
   }
 
-  // ── Drag to rotate (mouse + touch) ──
+  drawActive();
+  const visibleObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        heroVisible = entry.isIntersecting;
+        if (heroVisible) startSeq();
+        else stopSeq();
+      });
+    },
+    { threshold: 0.08 },
+  );
+  visibleObserver.observe(section);
+  startSeq();
+
+  // ── Drag to rotate (mouse + touch), free 360° — natural direction ──
   let dragging = false;
   let lastX = 0;
   let lastY = 0;
@@ -343,23 +388,36 @@ export function initHeroGlobe(): void {
     e.preventDefault();
   });
 
+  wrap.addEventListener('pointermove', (e: PointerEvent) => {
+    if (!dragging) return;
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    // lonOffset accumulates freely — sin/cos are periodic, so projection stays
+    // continuous across ±180°; the surface follows the cursor direction.
+    view.lon -= dx * 0.28;
+    view.lat = Math.max(-LAT_WINDOW, Math.min(LAT_WINDOW, view.lat + dy * 0.18));
+    velLon = -dx * 0.28;
+    render();
+    e.preventDefault();
+  });
+
   const endDrag = (): void => {
     if (!dragging) return;
     dragging = false;
     wrap.style.cursor = '';
-    if (hint) {
-      hint.style.opacity = '0.55';
-    }
+    if (hint) hint.style.opacity = '0.55';
     if (inertiaRaf) {
       cancelAnimationFrame(inertiaRaf);
       inertiaRaf = 0;
     }
-    if (Math.abs(velLon) > 0.05 && !prefersReduced) {
+    if (Math.abs(velLon) > 0.05) {
       let prevNow = performance.now();
       const loop = (now: number): void => {
         const dt = Math.min(48, now - prevNow);
         prevNow = now;
-        view.lon = Math.max(-LON_WINDOW, Math.min(LON_WINDOW, view.lon + velLon * dt * 0.82));
+        view.lon += velLon * dt * 0.82;
         velLon *= 0.916;
         render();
         if (Math.abs(velLon) > 0.04) {
@@ -372,22 +430,7 @@ export function initHeroGlobe(): void {
     }
   };
 
-  wrap.addEventListener('pointermove', (e: PointerEvent) => {
-    if (!dragging) return;
-    const dx = e.clientX - lastX;
-    const dy = e.clientY - lastY;
-    lastX = e.clientX;
-    lastY = e.clientY;
-    view.lon = Math.max(-LON_WINDOW, Math.min(LON_WINDOW, view.lon - dx * 0.3));
-    view.lat = Math.max(-LAT_WINDOW, Math.min(LAT_WINDOW, view.lat + dy * 0.18));
-    velLon = -dx * 0.3;
-    render();
-    e.preventDefault();
-  });
-
   wrap.addEventListener('pointerup', endDrag);
   wrap.addEventListener('pointercancel', endDrag);
   window.addEventListener('pointerup', endDrag);
-
-  renderSync();
 }

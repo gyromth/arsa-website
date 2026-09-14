@@ -649,7 +649,7 @@ html.html--booting body { visibility: hidden; }
 .hero-globe-wrap {
   position: relative;
   width: 100%;
-  max-width: clamp(320px, 30vw, 425px);
+  max-width: clamp(300px, 27vw, 395px);
   opacity: 0;
   transform: translateY(40px) scale(0.94);
   transition: opacity 1.2s var(--ease-out-expo) 0.35s, transform 1.2s var(--ease-out-expo) 0.35s;
@@ -717,20 +717,16 @@ html.html--booting body { visibility: hidden; }
 }
 
 .hero-globe__hint {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 0.9rem;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
+  margin-top: 0.55rem;
   font-size: 0.78rem;
   letter-spacing: 0.04em;
-  color: rgba(245, 246, 248, 0.55);
+  color: rgba(245, 246, 248, 0.5);
   white-space: nowrap;
   pointer-events: none;
   transition: opacity 0.6s var(--ease-out);
-  z-index: 2;
 }
 
 /* Hero statistic — typographic stat block (informational, not interactive) */
@@ -762,6 +758,48 @@ html.html--booting body { visibility: hidden; }
   line-height: 1.25;
   padding-left: 0.85rem;
   border-left: 1px solid rgba(245, 246, 248, 0.22);
+}
+
+/* Global Reach desktop visual — calm route lines (no globe), hidden on mobile */
+.reach-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  max-width: 620px;
+  margin: 2.4rem auto 0;
+}
+
+.reach-line {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: rgba(15, 20, 29, 0.72);
+}
+
+.reach-line__track {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  background: rgba(15, 20, 29, 0.12);
+}
+
+.reach-line__track i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.18s linear;
+}
+
+@media (max-width: 959px) {
+  .reach-lines { display: none; }
+}
+
+@media (min-width: 960px) {
+  /* Existing Global Reach globe svg is desktop-hidden: replaced by reach lines */
+  .connecting .connecting__visual { display: none; }
 }
 
 /* ── Scroll indicator — cohesive line flowing into arrow ── */

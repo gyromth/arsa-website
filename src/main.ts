@@ -319,6 +319,9 @@ function initGlobe(): void {
   const routes = Array.from(document.querySelectorAll<SVGPathElement>('.globe__route'));
   const markers = Array.from(document.querySelectorAll<SVGGElement>('.globe__plane'));
   if (!section || !world || routes.length === 0) return;
+  // On desktop the old globe visual is hidden (replaced by calm reach lines);
+  // mobile keeps the original scroll-driven globe untouched.
+  if (window.matchMedia('(min-width: 960px)').matches) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -331,31 +334,10 @@ function initGlobe(): void {
     }
   });
 
-  const isDesktop = window.matchMedia('(min-width: 960px)').matches;
-
-  // Desktop Global Reach: calm scroll-driven visual — all routes remain
-  // visible, the one aligned with scroll progress is highlighted; no markers.
-  const drawStatic = (p: number): void => {
-    const rotation = -14 + 22 * p;
-    world.style.transform = `rotate(${rotation.toFixed(2)}deg)`;
-    const idx = Math.min(routes.length - 1, Math.max(0, Math.floor(p * routes.length)));
-    routes.forEach((r, i) => {
-      r.style.strokeDasharray = 'none';
-      r.style.strokeDashoffset = '0';
-      r.style.opacity = i === idx ? '0.95' : '0.32';
-    });
-    markers.forEach((m) => (m.style.opacity = '0'));
-  };
-
   const draw = (p: number): void => {
     // Globe rotation follows scroll (forward / reverse).
     const rotation = -22 + 44 * p;
     world.style.transform = `rotate(${rotation.toFixed(2)}deg)`;
-
-    if (isDesktop) {
-      drawStatic(p);
-      return;
-    }
 
     const total = routes.length;
     const idx = Math.min(total - 1, Math.floor(p * total));
@@ -390,10 +372,6 @@ function initGlobe(): void {
     });
   };
 
-  if (isDesktop) {
-    drawStatic(0.35);
-    return;
-  }
   if (prefersReduced) {
     // Static globe: several routes drawn, no markers, no rotation motion.
     routes.forEach((r, i) => {
@@ -440,6 +418,43 @@ function initGlobe(): void {
   update();
 }
 
+
+// ── Global Reach desktop strip — calm scroll-driven route lines ──
+function initReachLines(): void {
+  const lines = document.querySelectorAll<HTMLElement>('.reach-line');
+  if (!lines.length) return;
+  const section = document.querySelector<HTMLElement>('.connecting');
+  if (!section) return;
+  if (!window.matchMedia('(min-width: 960px)').matches) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sets = (widths: number[]): void => {
+    widths.forEach((w, i) => {
+      const track = lines[i]?.querySelector('i');
+      if (track) track.style.width = `${(w * 100).toFixed(0)}%`;
+    });
+  };
+  if (reduced) {
+    sets([1, 0.72, 0.45]);
+    document.querySelectorAll<HTMLElement>('.connecting__visual');
+    return;
+  }
+  let queued = false;
+  const onScroll = (): void => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      const rect = section.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const p = Math.min(1, Math.max(0, (vh - rect.top) / (vh * 0.8)));
+      sets([0, 1, 2].map((i) => Math.min(1, Math.max(0, p * 2.4 - i * 0.45))));
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+}
+
 // ── Smooth Anchor ──────────────────────────────────────────
 function initSmoothAnchors(): void {
   document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
@@ -467,5 +482,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initHeaderScroll();
   initGlobe();
+  initReachLines();
   initSmoothAnchors();
 });

@@ -137,14 +137,16 @@
                   </g>
                 </g>
               </svg>
-              <span class="hero-globe__hint" aria-hidden="true">
-                <svg width="24" height="10" viewBox="0 0 24 10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
-                  <path d="M7 5C5.5 3 3.5 2 1 2"/><path d="M3 1L1 2l2 1.4"/>
-                  <path d="M17 5c1.5-2 4-3.5 6-3"/><path d="M21 3.6L23 2l-2-1.6"/>
-                </svg>
-                <span data-i18n="hero.globe.hint">Drag to explore</span>
-              </span>
             </div>
+
+            <!-- Drag affordance: separate line under the globe (never overlaps it) -->
+            <span class="hero-globe__hint" aria-hidden="true">
+              <svg width="24" height="10" viewBox="0 0 24 10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+                <path d="M7 5C5.5 3 3.5 2 1 2"/><path d="M3 1L1 2l2 1.4"/>
+                <path d="M17 5c1.5-2 4-3.5 6-3"/><path d="M21 3.6L23 2l-2-1.6"/>
+              </svg>
+              <span data-i18n="hero.globe.hint">Drag to explore</span>
+            </span>
 
             <!-- Statistic — informational, not interactive -->
             <div class="hero__stat">
@@ -269,6 +271,25 @@
           <h2 class="connecting__title reveal" data-i18n="connecting.title">Connecting people<br>across borders</h2>
           <p class="connecting__text reveal" data-i18n="connecting.text">Building bridges between businesses and talent — wherever the best people are.</p>
         </div>
+
+          <!-- Desktop-only lightweight scroll-driven route lines (calm, no globe) -->
+          <div class="reach-lines" aria-hidden="true">
+            <div class="reach-line" data-reach="1">
+              <span class="reach-line__city" data-i18n="reach.routes.1a">Delhi</span>
+              <span class="reach-line__track"><i></i></span>
+              <span class="reach-line__city" data-i18n="reach.routes.1b">Moscow</span>
+            </div>
+            <div class="reach-line" data-reach="2">
+              <span class="reach-line__city" data-i18n="reach.routes.2a">Delhi</span>
+              <span class="reach-line__track"><i></i></span>
+              <span class="reach-line__city" data-i18n="reach.routes.2b">Bangkok</span>
+            </div>
+            <div class="reach-line" data-reach="3">
+              <span class="reach-line__city" data-i18n="reach.routes.3a">London</span>
+              <span class="reach-line__track"><i></i></span>
+              <span class="reach-line__city" data-i18n="reach.routes.3b">Frankfurt</span>
+            </div>
+          </div>
       </section>
 
       <!-- ═══════════════════════════════════════════
