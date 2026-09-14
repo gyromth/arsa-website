@@ -372,7 +372,9 @@ html.html--booting body { visibility: hidden; }
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(90% 70% at 15% 30%, rgba(10, 13, 18, 0.5) 0%, rgba(10, 13, 18, 0) 60%);
+  background:
+    linear-gradient(90deg, rgba(10, 13, 18, 0.5) 0%, rgba(10, 13, 18, 0.15) 38%, rgba(10, 13, 18, 0) 58%),
+    radial-gradient(95% 80% at 25% 35%, rgba(10, 13, 18, 0.45) 0%, rgba(10, 13, 18, 0) 62%);
   pointer-events: none;
   z-index: 1;
   opacity: 0;
@@ -590,7 +592,7 @@ html.html--booting body { visibility: hidden; }
 
 .hero__subtitle {
   font-size: var(--fs-body);
-  color: rgba(245, 246, 248, 0.62);
+  color: rgba(245, 246, 248, 0.72);
   max-width: 46ch;
   line-height: 1.75;
   margin-bottom: 1.75rem;
@@ -1162,19 +1164,6 @@ html.html--booting body { visibility: hidden; }
 /* Very narrow screens: keep the headline strong but wrapped cleanly */
 @media (max-width: 340px) {
   .hero__title { font-size: clamp(2.15rem, 1.95rem + 1vw, 2.4rem); }
-}
-
-/* Extra-short screens: shrink the visual further */
-@media (max-width: 959px) and (max-height: 700px) {
-  .hero { padding-top: calc(var(--header-h) + 0.1rem); padding-bottom: 0.5rem; }
-  .hero__container { gap: 0.6rem; }
-  .hero__title { font-size: 1.7rem; margin-bottom: 0.6rem; }
-  .hero__subtitle { font-size: 0.85rem; line-height: 1.5; margin-bottom: 0.7rem; }
-  .hero__meta { margin-bottom: 0.5rem; }
-  .hero__float-label { padding: 0.4rem 0.8rem; }
-  .hero__float-num { font-size: 1.15rem; }
-  .hero__float-text { font-size: 0.68rem; }
-  .hero__actions .btn--lg { padding: 0.75em 1.5em; font-size: 0.78rem; }
 }
 
 /* ── Small-width padding safety ─────────────── */
