@@ -760,14 +760,8 @@ html.html--booting body { visibility: hidden; }
   border-left: 1px solid rgba(245, 246, 248, 0.22);
 }
 
-/* Global Reach desktop visual — decorative scroll-linked flight arc (no globe,
-   no cities). Hidden on mobile, which keeps the original globe untouched. */
-.reach-flight {
-  max-width: clamp(320px, 46vw, 520px);
-  margin: clamp(1.5rem, 1rem + 2vw, 2.5rem) auto 0;
-  color: var(--accent);
-}
-
+/* Global Reach desktop visual — small decorative flight arc beside the text
+   (no globe, no cities). Hidden on mobile, which keeps the original globe. */
 .reach-flight__svg {
   display: block;
   width: 100%;
@@ -789,6 +783,7 @@ html.html--booting body { visibility: hidden; }
 
 .reach-flight__plane {
   color: currentColor;
+  filter: drop-shadow(0 3px 6px rgba(37, 99, 235, 0.35));
 }
 
 @media (max-width: 959px) {
@@ -798,6 +793,42 @@ html.html--booting body { visibility: hidden; }
 @media (min-width: 960px) {
   /* Existing Global Reach globe svg is desktop-hidden: replaced by flight arc */
   .connecting .connecting__visual { display: none; }
+
+  /* Compact two-column composition: text left, small flight right.
+     Section no longer stretches — vertical padding is reduced. */
+  .connecting__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 520px) minmax(300px, 400px);
+    justify-content: center;
+    gap: clamp(1.5rem, 1rem + 3.5vw, 5rem);
+    align-items: center;
+    text-align: left;
+    padding: clamp(3rem, 2.5rem + 2.5vw, 4.5rem) 0;
+  }
+
+  .connecting__label,
+  .connecting__title,
+  .connecting__text { grid-column: 1; }
+
+  .connecting__title {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .connecting__text {
+    max-width: 42ch;
+    margin-left: 0;
+  }
+
+  .reach-flight {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: center;
+    width: clamp(280px, 26vw, 400px);
+    color: var(--accent);
+    transform: translateY(-7%);
+  }
 }
 
 /* ── Scroll indicator — cohesive line flowing into arrow ── */
