@@ -225,17 +225,50 @@
            CONNECTING — Visual statement
            ═══════════════════════════════════════════ -->
       <section class="connecting section" id="connecting">
-        <div class="connecting__visual" aria-hidden="true">
-          <svg class="connecting__routes" viewBox="0 0 1200 400" fill="none" preserveAspectRatio="xMidYMid slice">
-            <path class="route-line" d="M-50 75 C150 55 300 95 500 75 C700 55 850 65 1000 75 C1100 85 1200 70 1300 65" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-            <path class="route-line" d="M-30 105 C200 85 350 125 600 105 C800 85 950 100 1100 105 C1200 110 1300 95 1400 90" stroke="rgba(255,255,255,0.14)" stroke-width="1.2" stroke-linecap="round"/>
-            <circle class="route-pulse" r="5" fill="var(--accent)" opacity="0"/>
-            <circle class="route-dot" cx="500" cy="75" r="5" fill="var(--accent)" opacity="0.7"/>
-            <circle class="route-dot" cx="200" cy="92" r="3" fill="var(--accent)" opacity="0.45"/>
-            <circle class="route-dot" cx="800" cy="68" r="4" fill="var(--accent)" opacity="0.55"/>
-          </svg>
-        </div>
         <div class="container connecting__inner">
+          <!-- Scroll-driven globe: routes draw sequentially as the section scrolls -->
+          <div class="connecting__visual" aria-hidden="true">
+            <svg class="globe" viewBox="0 0 600 600" fill="none">
+              <defs>
+                <radialGradient id="globeGrad" cx="36%" cy="32%" r="72%">
+                  <stop offset="0%" stop-color="#1e2c4b"/>
+                  <stop offset="55%" stop-color="#111a30"/>
+                  <stop offset="100%" stop-color="#0a0f1a"/>
+                </radialGradient>
+              </defs>
+              <circle cx="300" cy="300" r="280" fill="url(#globeGrad)" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
+              <g class="globe__world">
+                <ellipse cx="300" cy="300" rx="60" ry="280" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <ellipse cx="300" cy="300" rx="130" ry="280" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <ellipse cx="300" cy="300" rx="200" ry="280" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <ellipse cx="300" cy="300" rx="250" ry="280" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+                <ellipse cx="300" cy="300" rx="280" ry="90" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <ellipse cx="300" cy="300" rx="280" ry="180" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <ellipse cx="300" cy="300" rx="280" ry="245" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+                <g class="globe__land" fill="rgba(56,189,248,0.13)" stroke="rgba(56,189,248,0.22)" stroke-width="1">
+                  <path d="M125 225 C95 195 100 140 145 125 C185 112 225 130 232 165 C238 195 220 215 195 218 C170 221 145 240 125 225 Z"/>
+                  <path d="M200 305 C175 298 170 330 180 360 C190 392 205 422 200 445 C196 462 178 458 170 435 C160 405 168 340 200 305 Z"/>
+                  <path d="M258 172 C250 150 272 135 292 140 C310 145 315 162 303 178 C292 190 265 192 258 172 Z"/>
+                  <path d="M252 245 C238 220 258 200 283 205 C306 210 315 232 308 258 C300 292 288 328 270 338 C254 346 244 322 250 285 C253 268 254 258 252 245 Z"/>
+                  <path d="M305 148 C335 130 385 142 412 172 C438 200 445 240 420 268 C395 295 350 306 330 286 C312 268 292 242 292 214 C292 190 294 164 305 148 Z"/>
+                  <path d="M395 348 C378 338 372 360 382 380 C392 402 418 412 434 402 C450 392 448 372 434 360 C420 348 408 356 395 348 Z"/>
+                </g>
+                <circle class="globe__point" cx="350" cy="235" r="3.5"/>
+                <circle class="globe__point" cx="285" cy="168" r="3"/>
+                <circle class="globe__point" cx="385" cy="248" r="3"/>
+                <circle class="globe__point" cx="142" cy="205" r="3"/>
+                <circle class="globe__point" cx="272" cy="182" r="2.5"/>
+                <path class="globe__route" d="M350 235 Q318 188 285 168"/>
+                <path class="globe__route" d="M350 235 Q370 234 385 248"/>
+                <path class="globe__route" d="M142 205 Q250 165 385 248"/>
+                <path class="globe__route" d="M350 235 Q310 206 272 182"/>
+                <circle class="globe__marker" r="5"/>
+                <circle class="globe__marker" r="5"/>
+                <circle class="globe__marker" r="5"/>
+                <circle class="globe__marker" r="5"/>
+              </g>
+            </svg>
+          </div>
           <span class="connecting__label reveal" data-i18n="connecting.label">Global reach</span>
           <h2 class="connecting__title reveal" data-i18n="connecting.title">Connecting people<br>across borders</h2>
           <p class="connecting__text reveal" data-i18n="connecting.text">Building bridges between businesses and talent — wherever the best people are.</p>

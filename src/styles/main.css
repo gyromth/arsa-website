@@ -874,29 +874,42 @@ html.html--booting body { visibility: hidden; }
 }
 
 .connecting__visual {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem);
 }
 
-.connecting__routes {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%;
-  height: 120%;
+/* Globe */
+.globe {
+  width: clamp(210px, 42vw, 340px);
+  height: auto;
 }
 
-/* Dash values are driven by JS (scroll-linked). */
-.route-line {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
+@media (max-width: 480px) {
+  .globe { width: clamp(190px, 70vw, 250px); }
 }
 
-.route-dot { opacity: 0; }
+.globe__world {
+  transform-origin: 300px 300px;
+}
 
-.route-pulse { opacity: 0; }
+.globe__route {
+  fill: none;
+  stroke: #6ea8ff;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+.globe__point {
+  fill: #8ab4ff;
+}
+
+.globe__marker {
+  fill: #dbeaff;
+  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.8));
+  opacity: 0;
+}
 
 .connecting__inner {
   position: relative;

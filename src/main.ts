@@ -311,58 +311,71 @@ function initPointerGlows(): void {
   });
 }
 
-// ── Connecting Routes — scroll-linked draw + travelling pulse ──
-function initConnectingRoutes(): void {
+// ── Connecting Globe — scroll-driven rotation + sequential routes ──
+function initGlobe(): void {
   const section = document.querySelector<HTMLElement>('.connecting');
-  const lines = Array.from(document.querySelectorAll<SVGPathElement>('.route-line'));
-  const dots = Array.from(document.querySelectorAll<SVGCircleElement>('.route-dot'));
-  const pulse = document.querySelector<SVGCircleElement>('.route-pulse');
-  if (!section || lines.length === 0) return;
+  const world = document.querySelector<SVGGElement>('.globe__world');
+  const routes = Array.from(document.querySelectorAll<SVGPathElement>('.globe__route'));
+  const markers = Array.from(document.querySelectorAll<SVGCircleElement>('.globe__marker'));
+  if (!section || !world || routes.length === 0) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Cache path lengths once — never recalculate during scroll.
-  const lengths = lines.map((l) => {
+  const lengths = routes.map((r) => {
     try {
-      return l.getTotalLength();
+      return r.getTotalLength();
     } catch {
       return 1000;
     }
   });
 
   const draw = (p: number): void => {
-    lines.forEach((l, i) => {
-      const start = i * 0.12;
-      const lp = Math.min(1, Math.max(0, (p - start) / (1 - start)));
-      l.style.strokeDashoffset = String(lengths[i] * (1 - lp));
+    // Globe rotation follows scroll (forward / reverse).
+    const rotation = -22 + 44 * p;
+    world.setAttribute('transform', `rotate(${rotation.toFixed(2)} 300 300)`);
+
+    const total = routes.length;
+    const idx = Math.min(total - 1, Math.floor(p * total));
+    const local = Math.min(1, Math.max(0, p * total - idx));
+
+    routes.forEach((r, i) => {
+      if (i === idx) {
+        const drawP = Math.min(1, local / 0.8);
+        r.style.strokeDashoffset = String(lengths[i] * (1 - drawP));
+        r.style.opacity = local > 0.8 ? String(Math.max(0, 1 - (local - 0.8) / 0.2)) : '1';
+      } else {
+        r.style.opacity = '0';
+      }
     });
-    dots.forEach((d, i) => {
-      const dp = Math.min(1, Math.max(0, (p - (0.32 + i * 0.14)) / 0.3));
-      d.style.opacity = String(dp);
+    markers.forEach((m, i) => {
+      if (i === idx && local < 0.8) {
+        const pt = routes[idx].getPointAtLength(lengths[idx] * Math.min(1, local / 0.8));
+        m.setAttribute('transform', `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)})`);
+        m.style.opacity = '1';
+      } else {
+        m.style.opacity = '0';
+      }
     });
-    if (pulse && lengths[0] > 0) {
-      const head = Math.min(1, Math.max(0, p));
-      const pt = lines[0].getPointAtLength(lengths[0] * head);
-      pulse.setAttribute('transform', `translate(${pt.x.toFixed(2)} ${pt.y.toFixed(2)})`);
-      pulse.style.opacity = head > 0.02 && head < 0.985 ? '1' : '0';
-    }
   };
 
   if (prefersReduced) {
-    lines.forEach((l) => {
-      l.style.strokeDasharray = 'none';
-      l.style.strokeDashoffset = '0';
+    // Static globe: several routes drawn, no markers, no rotation motion.
+    routes.forEach((r, i) => {
+      r.style.strokeDasharray = 'none';
+      r.style.strokeDashoffset = '0';
+      r.style.opacity = i < 3 ? String(0.75 - i * 0.2) : '0';
     });
-    dots.forEach((d) => { d.style.opacity = '1'; });
-    if (pulse) pulse.style.opacity = '0';
+    markers.forEach((m) => { m.style.opacity = '0'; });
+    world.setAttribute('transform', 'rotate(-8 300 300)');
     return;
   }
 
-  lines.forEach((l, i) => {
-    l.style.strokeDasharray = String(lengths[i]);
-    l.style.strokeDashoffset = String(lengths[i]);
+  routes.forEach((r, i) => {
+    r.style.strokeDasharray = String(lengths[i]);
+    r.style.strokeDashoffset = String(lengths[i]);
   });
-  dots.forEach((d) => { d.style.opacity = '0'; });
+  markers.forEach((m) => { m.style.opacity = '0'; });
   draw(0);
 
   let ticking = false;
@@ -376,7 +389,7 @@ function initConnectingRoutes(): void {
     const total = vh + rect.height;
     const passed = vh - rect.top;
     const progress = Math.min(1, Math.max(0, passed / total));
-    if (Math.abs(progress - lastProgress) < 0.0015) return;
+    if (Math.abs(progress - lastProgress) < 0.002) return;
     lastProgress = progress;
     draw(progress);
   };
@@ -417,6 +430,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initMobileMenu();
   initHeaderScroll();
-  initConnectingRoutes();
+  initGlobe();
   initSmoothAnchors();
 });
