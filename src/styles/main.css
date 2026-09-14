@@ -367,6 +367,17 @@ html.html--booting body { visibility: hidden; }
   padding: calc(var(--header-h) + 1rem) 0 3.5rem;
 }
 
+/* Local contrast layer under the text column (mobile only) */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(90% 70% at 15% 30%, rgba(10, 13, 18, 0.5) 0%, rgba(10, 13, 18, 0) 60%);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+}
+
 /* Animated gradient blobs — calm "living light" */
 .hero__blobs {
   position: absolute;
@@ -572,13 +583,16 @@ html.html--booting body { visibility: hidden; }
 .hero__title.animated .title-line:nth-child(2) { transition-delay: 0.22s; }
 .hero__title.animated .title-line:nth-child(3) { transition-delay: 0.34s; }
 
-.title-accent { color: var(--accent); }
+.title-accent {
+  color: var(--accent);
+  text-shadow: 0 0 28px rgba(37, 99, 235, 0.5);
+}
 
 .hero__subtitle {
-  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.1rem);
+  font-size: var(--fs-body);
   color: rgba(245, 246, 248, 0.62);
   max-width: 46ch;
-  line-height: 1.7;
+  line-height: 1.75;
   margin-bottom: 1.75rem;
 }
 
@@ -1078,10 +1092,15 @@ html.html--booting body { visibility: hidden; }
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    /* Content-driven height — no forced empty space under the composition */
+    /* Content-driven height — no forced empty space under the composition.
+       Bottom padding mirrors the About section's top padding so the
+       blue -> white transition reads as intentional. */
     min-height: 0;
-    padding: calc(var(--header-h) + 0.5rem) 0 1rem;
+    padding: calc(var(--header-h) + 0.5rem) 0 clamp(3.5rem, 2.75rem + 3vw, 5.5rem);
   }
+
+  /* Contrast layer protects the headline on the ambient blue background */
+  .hero::after { opacity: 1; }
 
   /* Flatten content so its children can be ordered in the mobile stack */
   .hero__content { display: contents; }
@@ -1089,13 +1108,13 @@ html.html--booting body { visibility: hidden; }
   .hero__container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
     align-items: stretch;
   }
 
-  .hero__meta { order: 1; }
-  .hero__title { order: 2; }
-  .hero__subtitle { order: 3; }
+  .hero__meta { order: 1; margin-bottom: 0; }
+  .hero__title { order: 2; margin-bottom: 0; }
+  .hero__subtitle { order: 3; margin-bottom: 0; }
 
   /* Worker graphic is fully removed from the mobile Hero (no layout ghost) */
   .hero__visual { display: contents; }
@@ -1106,14 +1125,15 @@ html.html--booting body { visibility: hidden; }
     order: 4;
     position: static;
     align-items: center;
+    gap: 0.6rem;
     width: fit-content;
-    padding: 0.55rem 1rem;
+    padding: 0.6rem 1.05rem;
     background: rgba(37, 99, 235, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 999px;
     opacity: 1;
   }
-  .hero__float-num { font-size: 1.35rem; }
+  .hero__float-num { font-size: 1.4rem; }
   .hero__float-text { font-size: 0.78rem; line-height: 1; }
 
   /* CTA group below the sticker: one row when it fits, left-aligned */
@@ -1121,12 +1141,11 @@ html.html--booting body { visibility: hidden; }
   .hero__actions .btn--lg { padding: 0.85em 1.6em; font-size: 0.82rem; }
 
   .hero__title {
-    font-size: clamp(2.4rem, 2.1rem + 1.6vw, 3rem);
+    font-size: clamp(2.6rem, 2.3rem + 1.7vw, 3.4rem);
     line-height: 1.12;
-    margin-bottom: 1rem;
   }
 
-  .hero__subtitle { margin-bottom: 1.1rem; }
+  .hero__subtitle { line-height: 1.75; }
 
   /* Scroll indicator is not needed on touch — the About section peeks below */
   .hero__scroll { display: none; }
@@ -1142,7 +1161,7 @@ html.html--booting body { visibility: hidden; }
 
 /* Very narrow screens: keep the headline strong but wrapped cleanly */
 @media (max-width: 340px) {
-  .hero__title { font-size: clamp(2rem, 1.8rem + 1vw, 2.25rem); }
+  .hero__title { font-size: clamp(2.15rem, 1.95rem + 1vw, 2.4rem); }
 }
 
 /* Extra-short screens: shrink the visual further */
