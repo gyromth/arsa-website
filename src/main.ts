@@ -3,7 +3,7 @@ import { translations, type Lang, type TranslationKey } from './i18n';
 
 /**
  * ARSA International — Main entry point
- * Warm editorial design — i18n, scroll reveals, mobile menu, header, hero SVG animation.
+ * Premium B2B design — i18n, scroll reveals, mobile menu, header, hero image reveal.
  */
 
 const STORAGE_KEY = 'arsa-lang';
@@ -27,22 +27,16 @@ function setLang(lang: Lang): void {
 function applyTranslations(lang: Lang): void {
   const t = translations[lang];
 
-  // Text content
   document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n') as TranslationKey;
-    if (t[key]) {
-      el.innerHTML = t[key];
-    }
+    if (t[key]) el.innerHTML = t[key];
   });
 
-  // Attributes (aria-label, etc.)
   document.querySelectorAll<HTMLElement>('[data-i18n-attr]').forEach((el) => {
     const spec = el.getAttribute('data-i18n-attr');
     if (!spec) return;
     const [key, attr] = spec.split(':') as [TranslationKey, string];
-    if (t[key] && attr) {
-      el.setAttribute(attr, t[key]);
-    }
+    if (t[key] && attr) el.setAttribute(attr, t[key]);
   });
 }
 
@@ -103,7 +97,7 @@ function initReveal(): void {
         }
       });
     },
-    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' },
+    { threshold: 0.08, rootMargin: '0px 0px -40px 0px' },
   );
 
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
@@ -129,13 +123,42 @@ function initMobileMenu(): void {
   });
 }
 
-// ── Hero SVG Line Animation ────────────────────────────────
+// ── Header Scroll ──────────────────────────────────────────
+function initHeaderScroll(): void {
+  const header = document.getElementById('header');
+  if (!header) return;
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        header.classList.toggle('header--scrolled', window.scrollY > 50);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+}
+
+// ── Hero Image Reveal ──────────────────────────────────────
+function initHeroImage(): void {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const image = document.querySelector('.hero__image');
+  if (!image) return;
+
+  if (prefersReduced) {
+    image.classList.add('visible');
+    return;
+  }
+
+  setTimeout(() => image.classList.add('visible'), 200);
+}
+
+// ── Hero Line Animation ────────────────────────────────────
 function initHeroLines(): void {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) {
     document.querySelectorAll('.hero-line-path').forEach((el) => el.classList.add('animated'));
-    const orbit = document.querySelector('.hero__orbit');
-    if (orbit) orbit.classList.add('visible');
     return;
   }
 
@@ -144,10 +167,8 @@ function initHeroLines(): void {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           document.querySelectorAll('.hero-line-path').forEach((path, i) => {
-            setTimeout(() => path.classList.add('animated'), i * 400);
+            setTimeout(() => path.classList.add('animated'), i * 500);
           });
-          const orbit = document.querySelector('.hero__orbit');
-          if (orbit) setTimeout(() => orbit.classList.add('visible'), 600);
           observer.unobserve(entry.target);
         }
       });
@@ -179,6 +200,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initLangSwitch();
   initReveal();
   initMobileMenu();
+  initHeaderScroll();
+  initHeroImage();
   initHeroLines();
   initSmoothAnchors();
 });

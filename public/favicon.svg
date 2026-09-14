@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="8" fill="#f5f0eb"/>
-  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
-    font-family="DM Sans, -apple-system, sans-serif" font-size="16" font-weight="700"
-    fill="#c4784a" letter-spacing="-0.5">A</text>
+  <rect width="32" height="32" rx="6" fill="#faf9f7"/>
+  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
+    font-family="Playfair Display, Georgia, serif" font-size="16" font-weight="600"
+    fill="#8b6c5a" letter-spacing="-0.5">A</text>
 </svg>

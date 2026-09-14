@@ -4,34 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title data-i18n="seo.title">ARSA International — International Recruitment &amp; Workforce Solutions</title>
-    <meta
-      name="description"
-      data-i18n="seo.description"
-      content="ARSA International helps businesses find skilled professionals from international markets. Recruitment, workforce solutions, and full-cycle hiring support."
-    />
+    <meta name="description" data-i18n="seo.description" content="ARSA International helps businesses find skilled professionals from international markets." />
     <meta property="og:type" content="website" />
     <meta property="og:title" data-i18n="seo.og:title" content="ARSA International — International Recruitment" />
-    <meta
-      property="og:description"
-      data-i18n="seo.og:description"
-      content="Connecting companies with skilled professionals from around the world."
-    />
+    <meta property="og:description" data-i18n="seo.og:description" content="Connecting companies with skilled professionals from around the world." />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="ARSA International" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <!-- Header -->
     <header class="header" id="header">
       <div class="header__inner">
         <a href="#" class="header__logo">ARSA International</a>
-        <nav class="header__nav" aria-label="Main navigation" data-i18n-attr="nav.main:aria-label">
+        <nav class="header__nav" aria-label="Main navigation" data-i18n-attr="a11y.nav.main:aria-label">
           <a href="#about" class="header__nav-link" data-i18n="nav.about">About</a>
           <a href="#services" class="header__nav-link" data-i18n="nav.services">Services</a>
           <a href="#process" class="header__nav-link" data-i18n="nav.process">Process</a>
@@ -41,18 +30,10 @@
             <button class="lang-switch__btn lang-switch__btn--active" data-lang="en" aria-pressed="true">EN</button>
             <button class="lang-switch__btn" data-lang="ru" aria-pressed="false">RU</button>
           </div>
-          <a href="#contact" class="header__cta btn btn--sm btn--outline" data-i18n="nav.cta">Get in touch</a>
+          <a href="#contact" class="header__cta btn btn--dark" data-i18n="nav.cta">Let's talk</a>
         </div>
-        <button
-          class="header__burger"
-          aria-label="Open menu"
-          data-i18n-attr="a11y.menu.open:aria-label"
-          aria-expanded="false"
-          aria-controls="mobile-nav"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="header__burger" aria-label="Open menu" data-i18n-attr="a11y.menu.open:aria-label" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
         </button>
       </div>
       <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" data-i18n-attr="a11y.nav.mobile:aria-label" hidden>
@@ -65,44 +46,53 @@
             <button class="lang-switch__btn" data-lang="ru" aria-pressed="false">RU</button>
           </div>
         </div>
-        <a href="#contact" class="mobile-nav__cta btn btn--accent" data-i18n="nav.cta">Get in touch</a>
+        <a href="#contact" class="mobile-nav__cta btn btn--dark" data-i18n="nav.cta">Let's talk</a>
       </nav>
     </header>
 
     <main>
       <!-- Hero -->
-      <section class="hero section" id="hero">
-        <div class="hero__bg" aria-hidden="true">
-          <svg class="hero__lines" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-            <path class="hero-line-path" d="M-100 400 C200 350 400 500 600 380 S900 280 1100 400 1400 350 1500 300" stroke="var(--accent)" stroke-width="1.2" stroke-linecap="round" opacity="0.25"/>
-            <path class="hero-line-path" d="M-50 500 C250 420 350 550 600 470 S850 350 1050 480 1350 420 1500 380" stroke="var(--ink)" stroke-width="0.8" stroke-linecap="round" opacity="0.1"/>
-            <path class="hero-line-path" d="M-80 300 C180 280 380 380 580 300 S800 220 1000 340 1300 280 1500 250" stroke="var(--accent)" stroke-width="0.6" stroke-linecap="round" opacity="0.15"/>
-            <circle class="hero__orbit" cx="600" cy="380" r="3" fill="var(--accent)" opacity="0.5"/>
-            <circle class="hero__orbit" cx="250" cy="390" r="2" fill="var(--ink)" opacity="0.15"/>
-            <circle class="hero__orbit" cx="900" cy="310" r="2.5" fill="var(--accent)" opacity="0.3"/>
-            <circle class="hero__orbit" cx="420" cy="480" r="2" fill="var(--ink)" opacity="0.12"/>
-            <circle class="hero__orbit" cx="750" cy="420" r="2" fill="var(--accent)" opacity="0.2"/>
-          </svg>
-        </div>
-        <div class="hero__content">
-          <span class="hero__eyebrow reveal" data-i18n="hero.eyebrow">International Recruitment</span>
-          <h1 class="hero__title reveal" data-i18n="hero.title">
-            People who help<br />your business move forward
-          </h1>
-          <p class="hero__subtitle reveal" data-i18n="hero.subtitle">
-            We connect companies with skilled professionals from around the world — reliably, transparently, and with full support at every stage.
-          </p>
-          <div class="reveal">
-            <a href="#contact" class="btn btn--accent" data-i18n="hero.cta">Let's talk</a>
+      <section class="hero" id="hero">
+        <div class="hero__container">
+          <div class="hero__text">
+            <span class="hero__eyebrow reveal" data-i18n="hero.eyebrow">International Recruitment</span>
+            <h1 class="hero__title reveal" data-i18n="hero.title">People who help<br>your business move forward</h1>
+            <p class="hero__subtitle reveal" data-i18n="hero.subtitle">We connect companies with skilled professionals from around the world — reliably, transparently, and with full support at every stage.</p>
+            <div class="reveal">
+              <a href="#contact" class="btn btn--accent" data-i18n="hero.cta">Let's talk</a>
+            </div>
           </div>
+          <div class="hero__visual reveal">
+            <div class="hero__image">
+              <div class="hero__image-gradient"></div>
+              <svg class="hero__image-lines" viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 400 C100 350 200 450 300 400 S500 350 600 400" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                <path d="M0 300 C150 280 250 380 400 320 S550 280 600 300" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/>
+                <path d="M0 500 C100 480 300 520 450 490 S550 470 600 500" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>
+                <circle cx="300" cy="400" r="4" fill="rgba(139,108,90,0.6)"/>
+                <circle cx="150" cy="320" r="2.5" fill="rgba(139,108,90,0.4)"/>
+                <circle cx="450" cy="350" r="3" fill="rgba(139,108,90,0.5)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="hero__scroll" aria-hidden="true">
+          <span class="hero__scroll-text">Scroll</span>
+          <div class="hero__scroll-line"></div>
         </div>
       </section>
 
       <!-- About -->
       <section class="about section" id="about">
         <div class="container">
-          <div class="about__text reveal">
-            <p data-i18n="about.text">ARSA International is a recruitment company that helps businesses find the right people. We work across international markets — building reliable channels for hiring professionals from Asia and other regions, so employers can focus on growth while we handle the workforce.</p>
+          <div class="about__grid">
+            <div class="about__label reveal">
+              <span class="section-label" data-i18n="about.label">About ARSA</span>
+            </div>
+            <div class="about__content reveal">
+              <p class="about__statement" data-i18n="about.statement">Helping businesses find skilled professionals across borders and build reliable teams for long-term growth.</p>
+              <p class="about__text" data-i18n="about.text">ARSA International is a recruitment company that helps businesses find the right people. We work across international markets — building reliable channels for hiring professionals from Asia and other regions, so employers can focus on growth while we handle the workforce.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -110,48 +100,75 @@
       <!-- Services -->
       <section class="services section" id="services">
         <div class="container">
-          <div class="services__list">
-            <div class="service-item reveal">
-              <span class="service-item__number">01</span>
-              <div class="service-item__body">
-                <h3 class="service-item__title" data-i18n="services.01.title">International recruitment</h3>
-                <p class="service-item__text" data-i18n="services.01.text">We source and place qualified professionals from international markets, matching skills and experience to your specific roles.</p>
-              </div>
-            </div>
-            <div class="service-item reveal">
-              <span class="service-item__number">02</span>
-              <div class="service-item__body">
-                <h3 class="service-item__title" data-i18n="services.02.title">Workforce solutions</h3>
-                <p class="service-item__text" data-i18n="services.02.text">From single specialist hires to large-scale staffing projects — we structure the hiring process around your business needs.</p>
-              </div>
-            </div>
-            <div class="service-item reveal">
-              <span class="service-item__number">03</span>
-              <div class="service-item__body">
-                <h3 class="service-item__title" data-i18n="services.03.title">Full-cycle support</h3>
-                <p class="service-item__text" data-i18n="services.03.text">We manage the entire journey — from initial screening and candidate presentation through onboarding and ongoing coordination.</p>
-              </div>
-            </div>
+          <div class="services__header reveal">
+            <span class="section-label" data-i18n="services.label">What we do</span>
           </div>
+          <div class="services__list">
+            <a href="#contact" class="service-row reveal">
+              <span class="service-row__num">01</span>
+              <div class="service-row__body">
+                <h3 class="service-row__title" data-i18n="services.01.title">International recruitment</h3>
+                <p class="service-row__text" data-i18n="services.01.text">We source and place qualified professionals from international markets, matching skills and experience to your specific roles.</p>
+              </div>
+              <svg class="service-row__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+            <a href="#contact" class="service-row reveal">
+              <span class="service-row__num">02</span>
+              <div class="service-row__body">
+                <h3 class="service-row__title" data-i18n="services.02.title">Workforce solutions</h3>
+                <p class="service-row__text" data-i18n="services.02.text">From single specialist hires to large-scale staffing projects — we structure the hiring process around your business needs.</p>
+              </div>
+              <svg class="service-row__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+            <a href="#contact" class="service-row reveal">
+              <span class="service-row__num">03</span>
+              <div class="service-row__body">
+                <h3 class="service-row__title" data-i18n="services.03.title">Full-cycle support</h3>
+                <p class="service-row__text" data-i18n="services.03.text">We manage the entire journey — from initial screening and candidate presentation through onboarding and ongoing coordination.</p>
+              </div>
+              <svg class="service-row__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Connecting — dark section -->
+      <section class="connecting section">
+        <div class="connecting__bg" aria-hidden="true">
+          <svg class="connecting__lines" viewBox="0 0 1400 500" fill="none" preserveAspectRatio="xMidYMid slice">
+            <path d="M-100 250 C200 200 400 300 700 250 S1000 200 1200 250 1500 220 1600 200" stroke="rgba(139,108,90,0.2)" stroke-width="1" stroke-linecap="round"/>
+            <path d="M-50 300 C250 260 350 340 700 290 S1000 240 1200 300 1500 270 1600 250" stroke="rgba(255,255,255,0.06)" stroke-width="0.8" stroke-linecap="round"/>
+            <circle cx="700" cy="250" r="3" fill="rgba(139,108,90,0.4)"/>
+            <circle cx="350" cy="280" r="2" fill="rgba(139,108,90,0.25)"/>
+            <circle cx="1050" cy="260" r="2.5" fill="rgba(139,108,90,0.3)"/>
+          </svg>
+        </div>
+        <div class="container connecting__inner">
+          <span class="connecting__label reveal" data-i18n="connecting.label">Global reach</span>
+          <h2 class="connecting__title reveal" data-i18n="connecting.title">Connecting people<br>across borders</h2>
+          <p class="connecting__text reveal" data-i18n="connecting.text">Building bridges between businesses and talent — wherever the best people are.</p>
         </div>
       </section>
 
       <!-- Process -->
       <section class="process section" id="process">
         <div class="container">
+          <div class="process__header reveal">
+            <span class="section-label" data-i18n="process.label">How it works</span>
+          </div>
           <div class="process__grid">
             <div class="process-step reveal">
-              <div class="process-step__number">01</div>
+              <span class="process-step__num">01</span>
               <h3 class="process-step__title" data-i18n="process.01.title">You describe the task</h3>
               <p class="process-step__text" data-i18n="process.01.text">Roles, volume, timeline, location.</p>
             </div>
             <div class="process-step reveal">
-              <div class="process-step__number">02</div>
+              <span class="process-step__num">02</span>
               <h3 class="process-step__title" data-i18n="process.02.title">We shape the solution</h3>
               <p class="process-step__text" data-i18n="process.02.text">Markets, format, terms.</p>
             </div>
             <div class="process-step reveal">
-              <div class="process-step__number">03</div>
+              <span class="process-step__num">03</span>
               <h3 class="process-step__title" data-i18n="process.03.title">We deliver results</h3>
               <p class="process-step__text" data-i18n="process.03.text">People ready to work, fully supported.</p>
             </div>
@@ -159,20 +176,18 @@
         </div>
       </section>
 
-      <!-- CTA -->
+      <!-- CTA — dark -->
       <section class="cta section" id="contact">
         <div class="container">
           <div class="cta__inner reveal">
-            <h2 class="cta__heading" data-i18n="cta.heading">Ready to discuss<br />your staffing needs?</h2>
+            <h2 class="cta__heading" data-i18n="cta.heading">Ready to discuss<br>your staffing needs?</h2>
             <p class="cta__text" data-i18n="cta.text">Tell us what you need — we'll propose a solution and outline the timeline.</p>
             <div class="cta__actions">
-              <a href="https://t.me/YOUR_TELEGRAM_HANDLE" class="btn btn--accent" target="_blank" rel="noopener noreferrer">
+              <a href="https://t.me/YOUR_TELEGRAM_HANDLE" class="btn btn--light" target="_blank" rel="noopener noreferrer">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
                 <span data-i18n="cta.telegram">Write to Telegram</span>
               </a>
-              <a href="mailto:info@arsa-international.com" class="btn btn--outline" data-i18n="cta.email">
-                info@arsa-international.com
-              </a>
+              <a href="mailto:info@arsa-international.com" class="btn btn--ghost-light" data-i18n="cta.email">info@arsa-international.com</a>
             </div>
           </div>
         </div>
@@ -181,9 +196,29 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="container footer__inner">
-        <span class="footer__brand">ARSA International</span>
-        <span class="footer__copy" data-i18n="footer.copy">© 2026 ARSA International</span>
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <span class="footer__logo">ARSA International</span>
+            <p class="footer__tagline" data-i18n="footer.tagline">International Recruitment & Workforce Solutions</p>
+          </div>
+          <div class="footer__nav">
+            <a href="#about" data-i18n="nav.about">About</a>
+            <a href="#services" data-i18n="nav.services">Services</a>
+            <a href="#process" data-i18n="nav.process">Process</a>
+          </div>
+          <div class="footer__contact">
+            <a href="https://t.me/YOUR_TELEGRAM_HANDLE" target="_blank" rel="noopener noreferrer">Telegram</a>
+            <a href="mailto:info@arsa-international.com">info@arsa-international.com</a>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <span class="footer__copy" data-i18n="footer.copy">© 2026 ARSA International</span>
+          <div class="lang-switch lang-switch--footer" role="group" aria-label="Language">
+            <button class="lang-switch__btn lang-switch__btn--active" data-lang="en" aria-pressed="true">EN</button>
+            <button class="lang-switch__btn" data-lang="ru" aria-pressed="false">RU</button>
+          </div>
+        </div>
       </div>
     </footer>
 

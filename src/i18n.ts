@@ -1,51 +1,45 @@
 /**
  * ARSA International — i18n
  * English / Russian localization.
- * Each key maps to a DOM element via data-i18n="key" or data-i18n-attr="key:attr".
  */
 
 export type Lang = 'en' | 'ru';
 
 export const translations = {
   en: {
-    // SEO
     'seo.title': 'ARSA International — International Recruitment & Workforce Solutions',
-    'seo.description':
-      'ARSA International helps businesses find skilled professionals from international markets. Recruitment, workforce solutions, and full-cycle hiring support.',
+    'seo.description': 'ARSA International helps businesses find skilled professionals from international markets. Recruitment, workforce solutions, and full-cycle hiring support.',
     'seo.og:title': 'ARSA International — International Recruitment',
-    'seo.og:description':
-      'Connecting companies with skilled professionals from around the world.',
+    'seo.og:description': 'Connecting companies with skilled professionals from around the world.',
     'seo.og:locale': 'en_US',
 
-    // Nav
     'nav.about': 'About',
     'nav.services': 'Services',
     'nav.process': 'Process',
-    'nav.cta': 'Get in touch',
+    'nav.cta': "Let's talk",
 
-    // Hero
     'hero.eyebrow': 'International Recruitment',
     'hero.title': 'People who help<br>your business move forward',
-    'hero.subtitle':
-      'We connect companies with skilled professionals from around the world — reliably, transparently, and with full support at every stage.',
+    'hero.subtitle': 'We connect companies with skilled professionals from around the world — reliably, transparently, and with full support at every stage.',
     'hero.cta': "Let's talk",
 
-    // About
-    'about.text':
-      'ARSA International is a recruitment company that helps businesses find the right people. We work across international markets — building reliable channels for hiring professionals from Asia and other regions, so employers can focus on growth while we handle the workforce.',
+    'about.label': 'About ARSA',
+    'about.statement': 'Helping businesses find skilled professionals across borders and build reliable teams for long-term growth.',
+    'about.text': 'ARSA International is a recruitment company that helps businesses find the right people. We work across international markets — building reliable channels for hiring professionals from Asia and other regions, so employers can focus on growth while we handle the workforce.',
 
-    // Services
+    'services.label': 'What we do',
     'services.01.title': 'International recruitment',
-    'services.01.text':
-      'We source and place qualified professionals from international markets, matching skills and experience to your specific roles.',
+    'services.01.text': 'We source and place qualified professionals from international markets, matching skills and experience to your specific roles.',
     'services.02.title': 'Workforce solutions',
-    'services.02.text':
-      'From single specialist hires to large-scale staffing projects — we structure the hiring process around your business needs.',
+    'services.02.text': 'From single specialist hires to large-scale staffing projects — we structure the hiring process around your business needs.',
     'services.03.title': 'Full-cycle support',
-    'services.03.text':
-      'We manage the entire journey — from initial screening and candidate presentation through onboarding and ongoing coordination.',
+    'services.03.text': 'We manage the entire journey — from initial screening and candidate presentation through onboarding and ongoing coordination.',
 
-    // Process
+    'connecting.label': 'Global reach',
+    'connecting.title': 'Connecting people<br>across borders',
+    'connecting.text': 'Building bridges between businesses and talent — wherever the best people are.',
+
+    'process.label': 'How it works',
     'process.01.title': 'You describe the task',
     'process.01.text': 'Roles, volume, timeline, location.',
     'process.02.title': 'We shape the solution',
@@ -53,16 +47,14 @@ export const translations = {
     'process.03.title': 'We deliver results',
     'process.03.text': 'People ready to work, fully supported.',
 
-    // CTA
     'cta.heading': 'Ready to discuss<br>your staffing needs?',
     'cta.text': "Tell us what you need — we'll propose a solution and outline the timeline.",
     'cta.telegram': 'Write to Telegram',
     'cta.email': 'info@arsa-international.com',
 
-    // Footer
+    'footer.tagline': 'International Recruitment & Workforce Solutions',
     'footer.copy': '© 2026 ARSA International',
 
-    // A11y
     'a11y.lang': 'en',
     'a11y.menu.open': 'Open menu',
     'a11y.menu.close': 'Close menu',
@@ -71,44 +63,39 @@ export const translations = {
   },
 
   ru: {
-    // SEO
     'seo.title': 'ARSA International — Международный подбор персонала',
-    'seo.description':
-      'ARSA International помогает компаниям находить квалифицированных специалистов на международном рынке. Подбор персонала, кадровые решения и полное сопровождение найма.',
+    'seo.description': 'ARSA International помогает компаниям находить квалифицированных специалистов на международном рынке. Подбор персонала, кадровые решения и полное сопровождение найма.',
     'seo.og:title': 'ARSA International — Международный рекрутинг',
-    'seo.og:description':
-      'Соединяем компании с профессионалами со всего мира.',
+    'seo.og:description': 'Соединяем компании с профессионалами со всего мира.',
     'seo.og:locale': 'ru_RU',
 
-    // Nav
     'nav.about': 'О нас',
     'nav.services': 'Услуги',
     'nav.process': 'Процесс',
     'nav.cta': 'Связаться',
 
-    // Hero
     'hero.eyebrow': 'Международный рекрутинг',
     'hero.title': 'Люди, которые помогают<br>вашему бизнесу двигаться дальше',
-    'hero.subtitle':
-      'Мы соединяем компании с квалифицированными специалистами со всего мира — надёжно, прозрачно и с полным сопровождением на каждом этапе.',
+    'hero.subtitle': 'Мы соединяем компании с квалифицированными специалистами со всего мира — надёжно, прозрачно и с полным сопровождением на каждом этапе.',
     'hero.cta': 'Давайте обсудим',
 
-    // About
-    'about.text':
-      'ARSA International — рекрутинговая компания, которая помогает бизнесу находить нужных людей. Мы работаем на международных рынках — выстраиваем надёжные каналы найма специалистов из Азии и других регионов, чтобы работодатели могли сосредоточиться на развитии бизнеса.',
+    'about.label': 'О ARSA',
+    'about.statement': 'Помогаем бизнесу находить квалифицированных специалистов за рубежом и выстраивать надёжные команды для долгосрочного роста.',
+    'about.text': 'ARSA International — рекрутинговая компания, которая помогает бизнесу находить нужных людей. Мы работаем на международных рынках — выстраиваем надёжные каналы найма специалистов из Азии и других регионов, чтобы работодатели могли сосредоточиться на развитии бизнеса.',
 
-    // Services
+    'services.label': 'Что мы делаем',
     'services.01.title': 'Международный подбор персонала',
-    'services.01.text':
-      'Находим и подбираем квалифицированных специалистов на международном рынке, соответствующих вашим требованиям и позициям.',
+    'services.01.text': 'Находим и подбираем квалифицированных специалистов на международном рынке, соответствующих вашим требованиям и позициям.',
     'services.02.title': 'Кадровые решения',
-    'services.02.text':
-      'От найма одного специалиста до масштабных кадровых проектов — мы выстраиваем процесс подбора под задачи вашего бизнеса.',
+    'services.02.text': 'От найма одного специалиста до масштабных кадровых проектов — мы выстраиваем процесс подбора под задачи вашего бизнеса.',
     'services.03.title': 'Полное сопровождение',
-    'services.03.text':
-      'Ведём весь процесс — от первичного отбора и презентации кандидатов до адаптации и дальнейшей координации.',
+    'services.03.text': 'Ведём весь процесс — от первичного отбора и презентации кандидатов до адаптации и дальнейшей координации.',
 
-    // Process
+    'connecting.label': 'Глобальный охват',
+    'connecting.title': 'Соединяем людей<br>через границы',
+    'connecting.text': 'Выстраиваем мосты между бизнесом и талантами — там, где лучшие специалисты.',
+
+    'process.label': 'Как это работает',
     'process.01.title': 'Вы описываете задачу',
     'process.01.text': 'Позиции, объём, сроки, регион.',
     'process.02.title': 'Мы формируем решение',
@@ -116,16 +103,14 @@ export const translations = {
     'process.03.title': 'Мы обеспечиваем результат',
     'process.03.text': 'Люди, готовые к работе, с полной поддержкой.',
 
-    // CTA
     'cta.heading': 'Обсудим ваши<br>кадровые потребности?',
     'cta.text': 'Расскажите о задаче — мы предложим решение и обозначим сроки.',
     'cta.telegram': 'Написать в Telegram',
     'cta.email': 'info@arsa-international.com',
 
-    // Footer
+    'footer.tagline': 'Международный подбор персонала и кадровые решения',
     'footer.copy': '© 2026 ARSA International',
 
-    // A11y
     'a11y.lang': 'ru',
     'a11y.menu.open': 'Открыть меню',
     'a11y.menu.close': 'Закрыть меню',
