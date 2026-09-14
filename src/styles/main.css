@@ -1069,7 +1069,9 @@ html.html--booting body { visibility: hidden; }
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    padding: calc(var(--header-h) + 0.5rem) 0 1.25rem;
+    /* Content-driven height — no forced empty space under the composition */
+    min-height: 0;
+    padding: calc(var(--header-h) + 0.5rem) 0 1rem;
   }
 
   /* Flatten content so its children can be ordered in the mobile stack */
@@ -1078,7 +1080,7 @@ html.html--booting body { visibility: hidden; }
   .hero__container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.1rem;
+    gap: 0.9rem;
     align-items: stretch;
   }
 
@@ -1090,18 +1092,18 @@ html.html--booting body { visibility: hidden; }
   .hero__actions { order: 4; justify-content: center; }
   .hero__actions .btn--lg { padding: 0.85em 1.7em; font-size: 0.82rem; }
 
-  /* Worker + statistic share one compact centred strip below the CTAs */
+  /* Worker + statistic share one compact centred strip, connected to the CTAs */
   .hero__visual {
     order: 5;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.9rem;
   }
 
   .hero__figure {
-    max-width: 104px;
+    max-width: 124px;
     /* scale-only reveal on mobile — no downward shift into the label */
     transform: translateY(0) scale(0.96);
   }
@@ -1110,20 +1112,20 @@ html.html--booting body { visibility: hidden; }
   .hero__float-label {
     position: static;
     align-items: center;
-    padding: 0.45rem 0.9rem;
+    padding: 0.5rem 0.95rem;
     background: rgba(37, 99, 235, 0.14);
     border: none;
     border-radius: 999px;
   }
-  .hero__float-num { font-size: 1.2rem; }
-  .hero__float-text { font-size: 0.72rem; line-height: 1; }
+  .hero__float-num { font-size: 1.3rem; }
+  .hero__float-text { font-size: 0.74rem; line-height: 1; }
 
   .hero__title {
     font-size: clamp(1.6rem, 1.4rem + 1.2vw, 2rem);
     margin-bottom: 1rem;
   }
 
-  .hero__subtitle { margin-bottom: 1.25rem; }
+  .hero__subtitle { margin-bottom: 1rem; }
 
   /* Scroll indicator is not needed on touch — the About section peeks below */
   .hero__scroll { display: none; }
