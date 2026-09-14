@@ -765,16 +765,18 @@ html.html--booting body { visibility: hidden; }
 .reach-flight__svg {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .reach-flight__arc {
-  stroke: rgba(15, 20, 29, 0.22);
+  fill: none;
+  stroke: rgba(15, 20, 29, 0.2);
   stroke-width: 1;
   stroke-linecap: round;
 }
 
 .reach-flight__trail {
+  fill: none;
   stroke: currentColor;
   stroke-width: 1.6;
   stroke-linecap: round;
@@ -797,45 +799,32 @@ html.html--booting body { visibility: hidden; }
 }
 
 @media (min-width: 960px) {
-  /* Existing Global Reach globe svg is desktop-hidden: replaced by flight arc */
+  /* Existing Global Reach globe svg is desktop-hidden: replaced by flight path */
   .connecting .connecting__visual { display: none; }
 
-  /* Compact two-column composition: centered text left, small flight right.
-     Section no longer stretches — vertical padding is reduced. */
+  /* Compact centered composition: one text block centered, with a full-bleed
+     flight path layer spanning the whole section width behind it. */
   .connecting__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 520px) minmax(300px, 400px);
-    justify-content: center;
-    gap: clamp(1.5rem, 1rem + 3.5vw, 5rem);
-    align-items: center;
+    display: block;
+    text-align: center;
     padding: clamp(3rem, 2.5rem + 2.5vw, 4.5rem) 0;
   }
 
+  /* Text stays above the decorative path layer */
   .connecting__label,
   .connecting__title,
   .connecting__text {
-    grid-column: 1;
-    text-align: center;
+    position: relative;
+    z-index: 2;
   }
 
-  .connecting__title {
-    max-width: none;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .connecting__text {
-    max-width: 42ch;
-    margin: 0 auto;
-  }
-
+  /* Full-bleed scroll-linked flight layer */
   .reach-flight {
-    grid-column: 2;
-    grid-row: 1 / span 3;
-    align-self: center;
-    width: clamp(280px, 26vw, 400px);
+    position: absolute;
+    inset: 0;
+    width: 100%;
     color: var(--accent);
-    transform: translateY(-7%);
+    pointer-events: none;
   }
 }
 
