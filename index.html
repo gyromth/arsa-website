@@ -13,7 +13,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
 
     <!-- Pre-paint language bootstrap: prevents an English flash when RU is saved.
          Runs before the body renders. A safety timeout guarantees the page is
@@ -84,6 +84,8 @@
           <div class="hero__blob hero__blob--1"></div>
           <div class="hero__blob hero__blob--2"></div>
           <div class="hero__blob hero__blob--3"></div>
+          <div class="hero__blob hero__blob--4"></div>
+          <div class="hero__pointer-glow"></div>
         </div>
 
         <div class="hero__container">
@@ -121,17 +123,20 @@
                 <!-- Neck -->
                 <rect x="186" y="240" width="28" height="36" rx="10" fill="#1b2534"/>
                 <!-- Head -->
-                <circle cx="200" cy="214" r="30" fill="#1b2534"/>
-                <!-- Hard hat brim -->
-                <ellipse cx="200" cy="196" rx="58" ry="11" fill="var(--accent)"/>
-                <!-- Hard hat dome -->
-                <path d="M160 194 C160 164 176 144 200 144 C224 144 240 164 240 194 Z" fill="var(--accent)"/>
-                <!-- Helmet ridge -->
-                <path d="M200 144 V132" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
-                <!-- Brim highlight -->
-                <path d="M146 194 C170 187 230 187 254 194" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="200" cy="216" r="29" fill="#1b2534"/>
+                <!-- Safety helmet: short brim -->
+                <path d="M150 206 C172 199 228 199 250 206 C252 210 246 213 200 213 C154 213 148 210 150 206 Z" fill="var(--accent)"/>
+                <!-- Safety helmet: rounded shell -->
+                <path d="M157 206 C157 174 176 152 200 152 C224 152 243 174 243 206 Z" fill="var(--accent)"/>
+                <!-- Safety helmet: centre ridge -->
+                <path d="M200 152 V141" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/>
+                <!-- Safety helmet: side ridge hint -->
+                <path d="M176 158 C172 172 171 188 172 204" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M224 158 C228 172 229 188 228 204" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <!-- Shell highlight -->
+                <path d="M168 186 C176 170 188 162 200 161" stroke="rgba(255,255,255,0.32)" stroke-width="2" stroke-linecap="round" fill="none"/>
                 <!-- Target node -->
-                <circle cx="200" cy="196" r="3.5" fill="#ffffff" opacity="0.85"/>
+                <circle cx="200" cy="206" r="3.5" fill="#ffffff" opacity="0.85"/>
               </svg>
             </div>
 
@@ -145,7 +150,12 @@
 
         <a href="#about" class="hero__scroll" aria-label="Scroll to content" data-i18n-attr="a11y.scroll:aria-label">
           <span class="hero__scroll-text" data-i18n="hero.scroll">Scroll</span>
-          <span class="hero__scroll-line" aria-hidden="true"></span>
+          <span class="hero__scroll-icon" aria-hidden="true">
+            <span class="hero__scroll-line"></span>
+            <svg class="hero__scroll-arrow" width="16" height="9" viewBox="0 0 16 9" fill="none">
+              <path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
         </a>
       </section>
 

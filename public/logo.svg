@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 48" fill="none" role="img" aria-label="ARSA International">
   <path d="M24 5 L42 43 H31.5 L24 25 L16.5 43 H6 Z" fill="#2563eb"/>
-  <text x="54" y="31" font-family="Manrope, Inter, Arial, sans-serif" font-size="21" letter-spacing="-0.3" fill="#0f141c">
-    <tspan font-weight="800">ARSA</tspan>
+  <text x="54" y="31" font-family="Golos Text, Manrope, Inter, Arial, sans-serif" font-size="21" letter-spacing="-0.3" fill="#0f141c">
+    <tspan font-weight="700">ARSA</tspan>
     <tspan font-weight="500" fill="#4b5563"> International</tspan>
   </text>
 </svg>

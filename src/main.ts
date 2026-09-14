@@ -169,6 +169,57 @@ function initHeroFigure(): void {
   setTimeout(() => figure.classList.add('visible'), 400);
 }
 
+// ── Hero pointer glow (desktop, fine pointer, motion allowed) ──
+function initHeroPointerGlow(): void {
+  const hero = document.getElementById('hero');
+  const glow = document.querySelector<HTMLElement>('.hero__pointer-glow');
+  if (!hero || !glow) return;
+
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!finePointer || prefersReduced) return;
+
+  let targetX = hero.clientWidth / 2;
+  let targetY = hero.clientHeight / 2;
+  let curX = targetX;
+  let curY = targetY;
+  let raf = 0;
+  let inView = true;
+
+  const render = (): void => {
+    curX += (targetX - curX) * 0.06;
+    curY += (targetY - curY) * 0.06;
+    glow.style.transform = `translate3d(${curX.toFixed(1)}px, ${curY.toFixed(1)}px, 0)`;
+    raf = requestAnimationFrame(render);
+  };
+
+  hero.addEventListener(
+    'pointermove',
+    (e: PointerEvent) => {
+      const rect = hero.getBoundingClientRect();
+      targetX = e.clientX - rect.left;
+      targetY = e.clientY - rect.top;
+      glow.classList.add('is-active');
+    },
+    { passive: true },
+  );
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      inView = entries[0].isIntersecting;
+      if (inView && !raf) raf = requestAnimationFrame(render);
+      if (!inView && raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    },
+    { threshold: 0 },
+  );
+  io.observe(hero);
+
+  if (inView) raf = requestAnimationFrame(render);
+}
+
 // ── Connecting Routes — scroll-linked draw + travelling pulse ──
 function initConnectingRoutes(): void {
   const section = document.querySelector<HTMLElement>('.connecting');
@@ -270,6 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLangSwitch();
   initHeroTitle();
   initHeroFigure();
+  initHeroPointerGlow();
   initReveal();
   initMobileMenu();
   initHeaderScroll();
