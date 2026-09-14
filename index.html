@@ -13,7 +13,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <!-- Header -->
@@ -30,7 +30,7 @@
             <button class="lang-switch__btn lang-switch__btn--active" data-lang="en" aria-pressed="true">EN</button>
             <button class="lang-switch__btn" data-lang="ru" aria-pressed="false">RU</button>
           </div>
-          <a href="#contact" class="header__cta btn btn--dark" data-i18n="nav.cta">Let's talk</a>
+          <a href="#contact" class="header__cta btn btn--accent-sm" data-i18n="nav.cta">Let's talk</a>
         </div>
         <button class="header__burger" aria-label="Open menu" data-i18n-attr="a11y.menu.open:aria-label" aria-expanded="false" aria-controls="mobile-nav">
           <span></span><span></span><span></span>
@@ -46,65 +46,90 @@
             <button class="lang-switch__btn" data-lang="ru" aria-pressed="false">RU</button>
           </div>
         </div>
-        <a href="#contact" class="mobile-nav__cta btn btn--dark" data-i18n="nav.cta">Let's talk</a>
+        <a href="#contact" class="mobile-nav__cta btn btn--accent" data-i18n="nav.cta">Let's talk</a>
       </nav>
     </header>
 
     <main>
-      <!-- Hero -->
+      <!-- ═══════════════════════════════════════════
+           HERO — Dark, cinematic, human-centered
+           ═══════════════════════════════════════════ -->
       <section class="hero" id="hero">
+        <!-- Animated gradient blobs -->
+        <div class="hero__blobs" aria-hidden="true">
+          <div class="hero__blob hero__blob--1"></div>
+          <div class="hero__blob hero__blob--2"></div>
+          <div class="hero__blob hero__blob--3"></div>
+        </div>
         <div class="hero__grain" aria-hidden="true"></div>
+
         <div class="hero__container">
-          <div class="hero__text">
+          <div class="hero__content">
             <div class="hero__meta reveal">
               <span class="hero__meta-line"></span>
               <span class="hero__meta-label" data-i18n="hero.eyebrow">International Recruitment</span>
             </div>
-            <h1 class="hero__title" data-i18n="hero.title">People who help<br>your business<br>move forward</h1>
+            <h1 class="hero__title" data-i18n="hero.title">
+              <span class="title-line">People who</span>
+              <span class="title-line">help your business</span>
+              <span class="title-line"><span class="title-accent">move forward</span></span>
+            </h1>
             <p class="hero__subtitle reveal" data-i18n="hero.subtitle">We connect companies with skilled professionals from around the world — reliably, transparently, and with full support at every stage.</p>
             <div class="hero__actions reveal">
               <a href="#contact" class="btn btn--accent btn--lg" data-i18n="hero.cta">Let's talk</a>
+              <a href="#about" class="btn btn--ghost btn--lg">Learn more</a>
             </div>
           </div>
+
           <div class="hero__visual">
-            <div class="hero__visual-frame">
-              <!-- Gradient mesh — premium visual -->
-              <div class="hero__mesh"></div>
-              <!-- Animated trajectory lines -->
-              <svg class="hero__trajectories" viewBox="0 0 500 600" fill="none" preserveAspectRatio="xMidYMid slice">
-                <path class="traj-line" d="M-20 300 C80 260 160 340 250 300 S380 260 500 300" stroke="rgba(139,108,90,0.35)" stroke-width="1.2" stroke-linecap="round"/>
-                <path class="traj-line" d="M-10 200 C100 180 180 260 300 220 S420 180 520 200" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" stroke-linecap="round"/>
-                <path class="traj-line" d="M-30 420 C60 400 200 440 320 410 S440 390 530 420" stroke="rgba(139,108,90,0.2)" stroke-width="0.6" stroke-linecap="round"/>
-                <!-- Animated dots on trajectories -->
-                <circle class="traj-dot" cx="250" cy="300" r="4" fill="rgba(139,108,90,0.7)"/>
-                <circle class="traj-dot" cx="120" cy="270" r="2.5" fill="rgba(139,108,90,0.4)"/>
-                <circle class="traj-dot" cx="380" cy="280" r="3" fill="rgba(139,108,90,0.55)"/>
-                <circle class="traj-dot" cx="80" cy="410" r="2" fill="rgba(139,108,90,0.3)"/>
-                <circle class="traj-dot" cx="420" cy="400" r="2.5" fill="rgba(139,108,90,0.35)"/>
+            <!-- Worker silhouette — SVG illustration -->
+            <div class="hero__figure">
+              <svg class="hero__worker" viewBox="0 0 400 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Hard hat -->
+                <path d="M140 120 C140 80 180 50 200 48 C220 50 260 80 260 120 L270 130 L130 130 Z" fill="var(--accent)" opacity="0.9"/>
+                <rect x="125" y="128" width="150" height="8" rx="4" fill="var(--accent)" opacity="0.7"/>
+                <!-- Head -->
+                <ellipse cx="200" cy="155" rx="38" ry="42" fill="#2a2520"/>
+                <!-- Body / vest -->
+                <path d="M150 195 L130 340 L160 345 L175 250 L200 260 L225 250 L240 345 L270 340 L250 195 Z" fill="#1a1816"/>
+                <!-- Safety vest stripes -->
+                <rect x="165" y="210" width="70" height="4" rx="2" fill="var(--accent)" opacity="0.8"/>
+                <rect x="160" y="250" width="80" height="4" rx="2" fill="var(--accent)" opacity="0.6"/>
+                <rect x="155" y="290" width="90" height="4" rx="2" fill="var(--accent)" opacity="0.4"/>
+                <!-- Arms -->
+                <path d="M150 200 L110 300 L125 305 L155 215" fill="#1a1816"/>
+                <path d="M250 200 L290 280 L280 290 L245 215" fill="#1a1816"/>
+                <!-- Hands -->
+                <circle cx="115" cy="305" r="8" fill="#2a2520"/>
+                <circle cx="285" cy="285" r="8" fill="#2a2520"/>
+                <!-- Legs -->
+                <rect x="160" y="340" width="30" height="120" rx="8" fill="#151312"/>
+                <rect x="210" y="340" width="30" height="120" rx="8" fill="#151312"/>
+                <!-- Boots -->
+                <rect x="152" y="450" width="45" height="18" rx="6" fill="#0c0c0c"/>
+                <rect x="203" y="450" width="45" height="18" rx="6" fill="#0c0c0c"/>
               </svg>
-              <!-- Coordinate labels — global feel -->
-              <div class="hero__coords" aria-hidden="true">
-                <span class="hero__coord hero__coord--tl">51.5°N</span>
-                <span class="hero__coord hero__coord--br">28.6°E</span>
-              </div>
+              <!-- Overlay gradient on figure -->
+              <div class="hero__figure-overlay"></div>
             </div>
-            <!-- Stat strip -->
-            <div class="hero__stat reveal">
-              <span class="hero__stat-num">5+</span>
-              <span class="hero__stat-label">markets</span>
-              <span class="hero__stat-divider"></span>
-              <span class="hero__stat-num">10+</span>
-              <span class="hero__stat-label">industries</span>
+
+            <!-- Floating label -->
+            <div class="hero__float-label reveal">
+              <span class="hero__float-num">5+</span>
+              <span class="hero__float-text">markets</span>
             </div>
           </div>
         </div>
+
         <div class="hero__scroll" aria-hidden="true">
           <span class="hero__scroll-text">Scroll</span>
           <div class="hero__scroll-line"></div>
         </div>
       </section>
 
-      <!-- About -->
+      <!-- ═══════════════════════════════════════════
+           ABOUT — Light, editorial
+           ═══════════════════════════════════════════ -->
       <section class="about section" id="about">
         <div class="container">
           <div class="about__grid">
@@ -119,11 +144,13 @@
         </div>
       </section>
 
-      <!-- Services -->
+      <!-- ═══════════════════════════════════════════
+           SERVICES — Dark, interactive rows
+           ═══════════════════════════════════════════ -->
       <section class="services section" id="services">
         <div class="container">
           <div class="services__header reveal">
-            <span class="section-label" data-i18n="services.label">What we do</span>
+            <span class="section-label section-label--light" data-i18n="services.label">What we do</span>
           </div>
           <div class="services__list">
             <a href="#contact" class="service-row reveal">
@@ -154,15 +181,17 @@
         </div>
       </section>
 
-      <!-- Connecting — dark section -->
+      <!-- ═══════════════════════════════════════════
+           CONNECTING — Visual statement
+           ═══════════════════════════════════════════ -->
       <section class="connecting section">
-        <div class="connecting__bg" aria-hidden="true">
-          <svg class="connecting__lines" viewBox="0 0 1400 500" fill="none" preserveAspectRatio="xMidYMid slice">
-            <path d="M-100 250 C200 200 400 300 700 250 S1000 200 1200 250 1500 220 1600 200" stroke="rgba(139,108,90,0.2)" stroke-width="1" stroke-linecap="round"/>
-            <path d="M-50 300 C250 260 350 340 700 290 S1000 240 1200 300 1500 270 1600 250" stroke="rgba(255,255,255,0.06)" stroke-width="0.8" stroke-linecap="round"/>
-            <circle cx="700" cy="250" r="3" fill="rgba(139,108,90,0.4)"/>
-            <circle cx="350" cy="280" r="2" fill="rgba(139,108,90,0.25)"/>
-            <circle cx="1050" cy="260" r="2.5" fill="rgba(139,108,90,0.3)"/>
+        <div class="connecting__visual" aria-hidden="true">
+          <svg class="connecting__routes" viewBox="0 0 1200 400" fill="none" preserveAspectRatio="xMidYMid slice">
+            <path class="route-line" d="M-50 200 C150 150 300 250 500 200 C700 150 850 180 1000 200 C1100 210 1200 190 1300 180" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+            <path class="route-line" d="M-30 280 C200 240 350 320 600 270 C800 220 950 260 1100 280 C1200 290 1300 270 1400 260" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-linecap="round"/>
+            <circle class="route-dot" cx="500" cy="200" r="5" fill="var(--accent)" opacity="0.6"/>
+            <circle class="route-dot" cx="200" cy="220" r="3" fill="var(--accent)" opacity="0.3"/>
+            <circle class="route-dot" cx="800" cy="180" r="4" fill="var(--accent)" opacity="0.45"/>
           </svg>
         </div>
         <div class="container connecting__inner">
@@ -172,7 +201,9 @@
         </div>
       </section>
 
-      <!-- Process -->
+      <!-- ═══════════════════════════════════════════
+           PROCESS — Light, clear progression
+           ═══════════════════════════════════════════ -->
       <section class="process section" id="process">
         <div class="container">
           <div class="process__header reveal">
@@ -198,15 +229,18 @@
         </div>
       </section>
 
-      <!-- CTA — dark -->
+      <!-- ═══════════════════════════════════════════
+           CTA — Dark, dramatic
+           ═══════════════════════════════════════════ -->
       <section class="cta section" id="contact">
+        <div class="cta__blob" aria-hidden="true"></div>
         <div class="cta__grain" aria-hidden="true"></div>
         <div class="container">
           <div class="cta__inner reveal">
             <h2 class="cta__heading" data-i18n="cta.heading">Ready to discuss<br>your staffing needs?</h2>
             <p class="cta__text" data-i18n="cta.text">Tell us what you need — we'll propose a solution and outline the timeline.</p>
             <div class="cta__actions">
-              <a href="https://t.me/YOUR_TELEGRAM_HANDLE" class="btn btn--light btn--lg" target="_blank" rel="noopener noreferrer">
+              <a href="https://t.me/YOUR_TELEGRAM_HANDLE" class="btn btn--accent btn--lg" target="_blank" rel="noopener noreferrer">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
                 <span data-i18n="cta.telegram">Write to Telegram</span>
               </a>
