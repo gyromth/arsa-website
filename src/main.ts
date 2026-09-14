@@ -419,40 +419,59 @@ function initGlobe(): void {
 }
 
 
-// ── Global Reach desktop strip — calm scroll-driven route lines ──
-function initReachLines(): void {
-  const lines = document.querySelectorAll<HTMLElement>('.reach-line');
-  if (!lines.length) return;
+// ── Global Reach desktop arc — decorative plane bound to scroll progress ──
+function initReachFlight(): void {
   const section = document.querySelector<HTMLElement>('.connecting');
-  if (!section) return;
+  const arc = document.querySelector<SVGPathElement>('.reach-flight__arc');
+  const trail = document.querySelector<SVGPathElement>('.reach-flight__trail');
+  const plane = document.querySelector<SVGGElement>('.reach-flight__plane');
+  if (!section || !arc || !trail || !plane) return;
   if (!window.matchMedia('(min-width: 960px)').matches) return;
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const sets = (widths: number[]): void => {
-    widths.forEach((w, i) => {
-      const track = lines[i]?.querySelector('i');
-      if (track) track.style.width = `${(w * 100).toFixed(0)}%`;
-    });
+
+  // Path is static — measure once and reuse; getPointAtLength is only called
+  // on real scroll frames (never in an idle autoplay loop).
+  const length = arc.getTotalLength();
+
+  const place = (p: number): void => {
+    const t = Math.max(0, Math.min(1, p)) * length;
+    const pt = arc.getPointAtLength(t);
+    const ahead = arc.getPointAtLength(Math.min(length, t + 2));
+    const ang = (Math.atan2(ahead.y - pt.y, ahead.x - pt.x) * 180) / Math.PI;
+    plane.setAttribute(
+      'transform',
+      `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)}) rotate(${(ang + 90).toFixed(1)})`,
+    );
+    trail.style.strokeDasharray = `${length.toFixed(1)}`;
+    trail.style.strokeDashoffset = `${(length * (1 - t / length)).toFixed(1)}`;
   };
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduced) {
-    sets([1, 0.72, 0.45]);
-    document.querySelectorAll<HTMLElement>('.connecting__visual');
+    // Static illustration: full arc, plane resting mid-arc — no motion.
+    place(0.5);
     return;
   }
-  let queued = false;
-  const onScroll = (): void => {
-    if (queued) return;
-    queued = true;
-    requestAnimationFrame(() => {
-      queued = false;
-      const rect = section.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-      const p = Math.min(1, Math.max(0, (vh - rect.top) / (vh * 0.8)));
-      sets([0, 1, 2].map((i) => Math.min(1, Math.max(0, p * 2.4 - i * 0.45))));
-    });
+
+  let ticking = false;
+  const update = (): void => {
+    ticking = false;
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight || 1;
+    // Scroll down → plane flies forward; scroll up → it returns along the arc.
+    // No jumps: progress is a pure function of scroll position within the section.
+    const p = Math.min(1, Math.max(0, (vh - rect.top) / (vh + rect.height)));
+    place(p);
   };
+
+  const onScroll = (): void => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
-  onScroll();
+  update();
 }
 
 // ── Smooth Anchor ──────────────────────────────────────────
@@ -482,6 +501,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initHeaderScroll();
   initGlobe();
-  initReachLines();
+  initReachFlight();
   initSmoothAnchors();
 });

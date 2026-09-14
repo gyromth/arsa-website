@@ -272,23 +272,16 @@
           <p class="connecting__text reveal" data-i18n="connecting.text">Building bridges between businesses and talent — wherever the best people are.</p>
         </div>
 
-          <!-- Desktop-only lightweight scroll-driven route lines (calm, no globe) -->
-          <div class="reach-lines" aria-hidden="true">
-            <div class="reach-line" data-reach="1">
-              <span class="reach-line__city" data-i18n="reach.routes.1a">Delhi</span>
-              <span class="reach-line__track"><i></i></span>
-              <span class="reach-line__city" data-i18n="reach.routes.1b">Moscow</span>
-            </div>
-            <div class="reach-line" data-reach="2">
-              <span class="reach-line__city" data-i18n="reach.routes.2a">Delhi</span>
-              <span class="reach-line__track"><i></i></span>
-              <span class="reach-line__city" data-i18n="reach.routes.2b">Bangkok</span>
-            </div>
-            <div class="reach-line" data-reach="3">
-              <span class="reach-line__city" data-i18n="reach.routes.3a">London</span>
-              <span class="reach-line__track"><i></i></span>
-              <span class="reach-line__city" data-i18n="reach.routes.3b">Frankfurt</span>
-            </div>
+          <!-- Desktop-only decorative flight arc: plane travels along the arc,
+               position bound to the section's scroll progress (no cities) -->
+          <div class="reach-flight" aria-hidden="true">
+            <svg class="reach-flight__svg" viewBox="0 0 520 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="reach-flight__arc" d="M30 200 C 130 40, 390 40, 490 200"/>
+              <path class="reach-flight__trail" d="M30 200 C 130 40, 390 40, 490 200"/>
+              <g class="reach-flight__plane">
+                <path d="M0 -11 L3.2 -5.5 L2.4 -1 L11 -2.8 L4.6 5 L3.4 5.6 L2.8 11 L-2.8 11 L-3.4 5.6 L-4.6 5 L-11 -2.8 L-2.4 -1 L-3.2 -5.5 Z"/>
+              </g>
+            </svg>
           </div>
       </section>
 

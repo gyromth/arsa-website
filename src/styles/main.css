@@ -760,45 +760,43 @@ html.html--booting body { visibility: hidden; }
   border-left: 1px solid rgba(245, 246, 248, 0.22);
 }
 
-/* Global Reach desktop visual — calm route lines (no globe), hidden on mobile */
-.reach-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 0.95rem;
-  max-width: 620px;
-  margin: 2.4rem auto 0;
+/* Global Reach desktop visual — decorative scroll-linked flight arc (no globe,
+   no cities). Hidden on mobile, which keeps the original globe untouched. */
+.reach-flight {
+  max-width: clamp(320px, 46vw, 520px);
+  margin: clamp(1.5rem, 1rem + 2vw, 2.5rem) auto 0;
+  color: var(--accent);
 }
 
-.reach-line {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  color: rgba(15, 20, 29, 0.72);
+.reach-flight__svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.reach-line__track {
-  position: relative;
-  flex: 1;
-  height: 1px;
-  background: rgba(15, 20, 29, 0.12);
+.reach-flight__arc {
+  stroke: rgba(15, 20, 29, 0.22);
+  stroke-width: 1;
+  stroke-linecap: round;
 }
 
-.reach-line__track i {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 0%;
-  background: var(--accent);
-  transition: width 0.18s linear;
+.reach-flight__trail {
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+
+.reach-flight__plane {
+  color: currentColor;
 }
 
 @media (max-width: 959px) {
-  .reach-lines { display: none; }
+  .reach-flight { display: none; }
 }
 
 @media (min-width: 960px) {
-  /* Existing Global Reach globe svg is desktop-hidden: replaced by reach lines */
+  /* Existing Global Reach globe svg is desktop-hidden: replaced by flight arc */
   .connecting .connecting__visual { display: none; }
 }
 
@@ -1274,9 +1272,10 @@ html.html--booting body { visibility: hidden; }
   .hero__title { order: 2; margin-bottom: 0; }
   .hero__subtitle { order: 3; margin-bottom: 0; }
 
-  /* Hero globe stays desktop-only (unchanged mobile composition) */
+  /* Hero globe and its drag hint stay desktop-only (unchanged mobile composition) */
   .hero__visual { display: contents; }
   .hero-globe-wrap { display: none; }
+  .hero-globe__hint { display: none; }
 
   /* Statistic block sits above the CTAs, left-aligned with the text */
   .hero__stat {
