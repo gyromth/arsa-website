@@ -145,18 +145,6 @@ function initHeaderScroll(): void {
   update();
 }
 
-// ── Hero Title Animation ───────────────────────────────────
-function initHeroTitle(): void {
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const title = document.querySelector('.hero__title');
-  if (!title) return;
-  if (prefersReduced) {
-    title.classList.add('animated');
-    return;
-  }
-  setTimeout(() => title.classList.add('animated'), 150);
-}
-
 // ── Hero Figure Reveal ─────────────────────────────────────
 function initHeroFigure(): void {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -339,7 +327,6 @@ function initSmoothAnchors(): void {
 // ── Init ───────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initLangSwitch();
-  initHeroTitle();
   initHeroFigure();
   initPointerGlows();
   initReveal();

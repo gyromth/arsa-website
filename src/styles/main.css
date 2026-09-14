@@ -593,14 +593,7 @@ html.html--booting body { visibility: hidden; }
 
 .title-line {
   display: block;
-  transform: translateY(110%);
-  transition: transform 0.9s var(--ease-out-expo);
 }
-
-.hero__title.animated .title-line { transform: translateY(0); }
-.hero__title.animated .title-line:nth-child(1) { transition-delay: 0.1s; }
-.hero__title.animated .title-line:nth-child(2) { transition-delay: 0.22s; }
-.hero__title.animated .title-line:nth-child(3) { transition-delay: 0.34s; }
 
 .title-accent {
   color: var(--accent);
@@ -1173,9 +1166,9 @@ html.html--booting body { visibility: hidden; }
   .hero__blob { filter: blur(60px); }
   .hero__blob--3,
   .hero__blob--5 { display: none; }
-  .hero__blob--1 { opacity: 0.5; animation: blobMobileA 20s ease-in-out -3s infinite; }
-  .hero__blob--2 { opacity: 0.34; animation: blobMobileB 28s ease-in-out -11s infinite; }
-  .hero__blob--4 { opacity: 0.32; animation: blobMobileD 24s ease-in-out -7s infinite; }
+  .hero__blob--1 { opacity: 0.5; animation: blobMobileA 7s ease-in-out -1s infinite; }
+  .hero__blob--2 { opacity: 0.34; animation: blobMobileB 9s ease-in-out -4s infinite; }
+  .hero__blob--4 { opacity: 0.32; animation: blobMobileD 8s ease-in-out -2s infinite; }
 }
 
 /* Very narrow screens: keep the headline strong but wrapped cleanly */
