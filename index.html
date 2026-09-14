@@ -13,13 +13,37 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Pre-paint language bootstrap: prevents an English flash when RU is saved.
+         Runs before the body renders. A safety timeout guarantees the page is
+         never left hidden if the main module fails to load. -->
+    <script>
+      (function () {
+        var lang = 'en';
+        try {
+          var saved = localStorage.getItem('arsa-lang');
+          if (saved === 'ru' || saved === 'en') lang = saved;
+        } catch (e) {}
+        var root = document.documentElement;
+        root.lang = lang;
+        root.setAttribute('data-lang', lang);
+        root.classList.add('html--booting');
+        setTimeout(function () { root.classList.remove('html--booting'); }, 1500);
+      })();
+    </script>
   </head>
   <body>
     <!-- Header -->
     <header class="header" id="header">
       <div class="header__inner">
-        <a href="#" class="header__logo">ARSA International</a>
+        <a href="#" class="header__logo" aria-label="ARSA International" data-i18n-attr="a11y.logo:aria-label">
+          <svg class="header__logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+            <path d="M16 4 L27.5 28 H21 L16 15.5 L11 28 H4.5 Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="16" cy="19.5" r="2.2" fill="currentColor"/>
+          </svg>
+          <span class="header__logo-text">ARSA<span class="header__logo-text-sub">&nbsp;International</span></span>
+        </a>
         <nav class="header__nav" aria-label="Main navigation" data-i18n-attr="a11y.nav.main:aria-label">
           <a href="#about" class="header__nav-link" data-i18n="nav.about">About</a>
           <a href="#services" class="header__nav-link" data-i18n="nav.services">Services</a>
@@ -61,7 +85,6 @@
           <div class="hero__blob hero__blob--2"></div>
           <div class="hero__blob hero__blob--3"></div>
         </div>
-        <div class="hero__grain" aria-hidden="true"></div>
 
         <div class="hero__container">
           <div class="hero__content">
@@ -82,39 +105,38 @@
           </div>
 
           <div class="hero__visual">
-            <!-- Industrial hard-hat silhouette — abstract, no character reading -->
+            <!-- Industrial hard-hat worker icon in a target/crosshair frame -->
             <div class="hero__figure">
               <svg class="hero__worker" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                <!-- Technical frame -->
-                <circle cx="200" cy="200" r="186" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-                <circle cx="200" cy="200" r="150" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="3 9"/>
-                <path d="M200 6V26M200 374V394M6 200H26M374 200H394" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-                <!-- Torso / shoulders -->
-                <path d="M116 356 C116 290 152 258 200 258 C248 258 284 290 284 356 Z" fill="#151d2b"/>
-                <path d="M116 356 C116 290 152 258 200 258 L200 356 Z" fill="#101724"/>
+                <!-- Target / crosshair frame -->
+                <circle cx="200" cy="200" r="186" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
+                <circle cx="200" cy="200" r="148" stroke="rgba(255,255,255,0.07)" stroke-width="1" stroke-dasharray="2 10"/>
+                <path d="M200 6V30M200 370V394M6 200H30M370 200H394" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- Shoulders / workwear -->
+                <path d="M126 356 C126 298 158 270 200 270 C242 270 274 298 274 356 Z" fill="#141c29"/>
+                <path d="M126 356 C126 298 158 270 200 270 L200 356 Z" fill="#101724"/>
                 <!-- Safety vest stripes -->
-                <path d="M148 302 H252" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" opacity="0.95"/>
-                <path d="M138 330 H262" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+                <path d="M152 312 H248" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+                <path d="M144 338 H256" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
                 <!-- Neck -->
-                <rect x="182" y="226" width="36" height="44" rx="14" fill="#1a2331"/>
+                <rect x="186" y="240" width="28" height="36" rx="10" fill="#1b2534"/>
                 <!-- Head -->
-                <circle cx="200" cy="196" r="42" fill="#1a2331"/>
-                <!-- Hard hat dome -->
-                <path d="M154 192 C154 150 172 122 200 122 C228 122 246 150 246 192 Z" fill="var(--accent)"/>
+                <circle cx="200" cy="214" r="30" fill="#1b2534"/>
                 <!-- Hard hat brim -->
-                <path d="M136 194 C160 185 240 185 264 194 C268 198 262 202 200 202 C138 202 132 198 136 194 Z" fill="var(--accent)"/>
-                <path d="M136 194 C160 185 240 185 264 194" stroke="rgba(255,255,255,0.28)" stroke-width="1.5" stroke-linecap="round"/>
+                <ellipse cx="200" cy="196" rx="58" ry="11" fill="var(--accent)"/>
+                <!-- Hard hat dome -->
+                <path d="M160 194 C160 164 176 144 200 144 C224 144 240 164 240 194 Z" fill="var(--accent)"/>
                 <!-- Helmet ridge -->
-                <path d="M200 122 V104" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
-                <!-- Accent nodes -->
-                <circle cx="200" cy="200" r="3" fill="#ffffff" opacity="0.7"/>
-                <circle cx="116" cy="356" r="3" fill="var(--accent)" opacity="0.6"/>
-                <circle cx="284" cy="356" r="3" fill="var(--accent)" opacity="0.6"/>
+                <path d="M200 144 V132" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+                <!-- Brim highlight -->
+                <path d="M146 194 C170 187 230 187 254 194" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- Target node -->
+                <circle cx="200" cy="196" r="3.5" fill="#ffffff" opacity="0.85"/>
               </svg>
             </div>
 
             <!-- Floating stat label -->
-            <div class="hero__float-label reveal">
+            <div class="hero__float-label">
               <span class="hero__float-num" data-i18n="hero.stat.num">20+</span>
               <span class="hero__float-text" data-i18n="hero.stat.label">nationalities</span>
             </div>
@@ -134,10 +156,10 @@
         <div class="container">
           <div class="about__grid">
             <div class="about__label reveal">
-              <span class="section-label" data-i18n="about.label">About ARSA</span>
+              <span class="section-label" data-i18n="about.label">ARSA International</span>
             </div>
             <div class="about__content reveal">
-              <h2 class="section-heading" data-i18n="about.heading">Who we are</h2>
+              <h2 class="section-heading" data-i18n="about.heading">About ARSA</h2>
               <p class="about__statement" data-i18n="about.statement">Helping businesses find skilled professionals across borders and build reliable teams for long-term growth.</p>
               <p class="about__text" data-i18n="about.text">ARSA International is a recruitment company that helps businesses find the right people. We work across international markets — building reliable channels for hiring professionals from Asia and other regions, so employers can focus on growth while we handle the workforce.</p>
             </div>
@@ -152,7 +174,7 @@
         <div class="container">
           <div class="section__header reveal">
             <span class="section-label" data-i18n="services.label">Services</span>
-            <h2 class="section-heading section-heading--light" data-i18n="services.heading">What we do</h2>
+            <h2 class="section-heading section-heading--light" data-i18n="services.heading">What we do?</h2>
           </div>
           <div class="services__list">
             <a href="#contact" class="service-row reveal">
@@ -189,10 +211,11 @@
       <section class="connecting section" id="connecting">
         <div class="connecting__visual" aria-hidden="true">
           <svg class="connecting__routes" viewBox="0 0 1200 400" fill="none" preserveAspectRatio="xMidYMid slice">
-            <path class="route-line" d="M-50 200 C150 150 300 250 500 200 C700 150 850 180 1000 200 C1100 210 1200 190 1300 180" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-            <path class="route-line" d="M-30 280 C200 240 350 320 600 270 C800 220 950 260 1100 280 C1200 290 1300 270 1400 260" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-linecap="round"/>
+            <path class="route-line" d="M-50 200 C150 150 300 250 500 200 C700 150 850 180 1000 200 C1100 210 1200 190 1300 180" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+            <path class="route-line" d="M-30 280 C200 240 350 320 600 270 C800 220 950 260 1100 280 C1200 290 1300 270 1400 260" stroke="rgba(255,255,255,0.14)" stroke-width="1.2" stroke-linecap="round"/>
+            <circle class="route-pulse" r="5" fill="var(--accent)" opacity="0"/>
             <circle class="route-dot" cx="500" cy="200" r="5" fill="var(--accent)" opacity="0.7"/>
-            <circle class="route-dot" cx="200" cy="220" r="3" fill="var(--accent)" opacity="0.4"/>
+            <circle class="route-dot" cx="200" cy="220" r="3" fill="var(--accent)" opacity="0.45"/>
             <circle class="route-dot" cx="800" cy="180" r="4" fill="var(--accent)" opacity="0.55"/>
           </svg>
         </div>
@@ -210,7 +233,7 @@
         <div class="container">
           <div class="section__header reveal">
             <span class="section-label" data-i18n="process.label">Process</span>
-            <h2 class="section-heading" data-i18n="process.heading">How it works</h2>
+            <h2 class="section-heading" data-i18n="process.heading">How it works?</h2>
           </div>
           <div class="process__grid">
             <div class="process-step reveal">

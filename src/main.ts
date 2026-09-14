@@ -3,7 +3,7 @@ import { translations, type Lang, type TranslationKey } from './i18n';
 
 /**
  * ARSA International — Main entry point
- * Industrial Premium — i18n, cinematic hero, scroll reveals, mobile menu.
+ * Industrial Premium — i18n, cinematic hero, scroll-linked motion, mobile menu.
  */
 
 const STORAGE_KEY = 'arsa-lang';
@@ -22,6 +22,7 @@ function setLang(lang: Lang): void {
   updateSwitcherUI(lang);
   updateSEO(lang);
   document.documentElement.lang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
 }
 
 function applyTranslations(lang: Lang): void {
@@ -65,6 +66,11 @@ function initLangSwitch(): void {
   updateSwitcherUI(lang);
   updateSEO(lang);
   document.documentElement.lang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
+
+  // Language applied — reveal the page (removes the pre-paint guard).
+  document.documentElement.classList.remove('html--booting');
+
   document.querySelectorAll<HTMLButtonElement>('.lang-switch__btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       const newLang = btn.dataset.lang as Lang;
@@ -118,18 +124,25 @@ function initHeaderScroll(): void {
   if (!header) return;
   header.classList.add('header--hero');
 
+  // Activate the opaque/blurred header before hero content reaches it.
+  const threshold = Math.round(header.offsetHeight * 0.5) || 36;
+
   let ticking = false;
+  const update = (): void => {
+    ticking = false;
+    const scrolled = window.scrollY > threshold;
+    header.classList.toggle('header--scrolled', scrolled);
+    header.classList.toggle('header--hero', !scrolled);
+  };
+
   window.addEventListener('scroll', () => {
     if (!ticking) {
-      requestAnimationFrame(() => {
-        const scrolled = window.scrollY > 80;
-        header.classList.toggle('header--scrolled', scrolled);
-        header.classList.toggle('header--hero', !scrolled);
-        ticking = false;
-      });
       ticking = true;
+      requestAnimationFrame(update);
     }
-  });
+  }, { passive: true });
+
+  update();
 }
 
 // ── Hero Title Animation ───────────────────────────────────
@@ -153,27 +166,20 @@ function initHeroFigure(): void {
     figure.classList.add('visible');
     return;
   }
-  setTimeout(() => figure.classList.add('visible'), 500);
+  setTimeout(() => figure.classList.add('visible'), 400);
 }
 
-// ── Connecting Routes — scroll-linked animation ────────────
+// ── Connecting Routes — scroll-linked draw + travelling pulse ──
 function initConnectingRoutes(): void {
   const section = document.querySelector<HTMLElement>('.connecting');
   const lines = Array.from(document.querySelectorAll<SVGPathElement>('.route-line'));
   const dots = Array.from(document.querySelectorAll<SVGCircleElement>('.route-dot'));
+  const pulse = document.querySelector<SVGCircleElement>('.route-pulse');
   if (!section || lines.length === 0) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) {
-    lines.forEach((l) => {
-      l.style.strokeDasharray = 'none';
-      l.style.strokeDashoffset = '0';
-    });
-    dots.forEach((d) => { d.style.opacity = '1'; });
-    return;
-  }
 
-  // Cache path lengths once.
+  // Cache path lengths once — never recalculate during scroll.
   const lengths = lines.map((l) => {
     try {
       return l.getTotalLength();
@@ -182,11 +188,40 @@ function initConnectingRoutes(): void {
     }
   });
 
+  const draw = (p: number): void => {
+    lines.forEach((l, i) => {
+      const start = i * 0.12;
+      const lp = Math.min(1, Math.max(0, (p - start) / (1 - start)));
+      l.style.strokeDashoffset = String(lengths[i] * (1 - lp));
+    });
+    dots.forEach((d, i) => {
+      const dp = Math.min(1, Math.max(0, (p - (0.32 + i * 0.14)) / 0.3));
+      d.style.opacity = String(dp);
+    });
+    if (pulse && lengths[0] > 0) {
+      const head = Math.min(1, Math.max(0, p));
+      const pt = lines[0].getPointAtLength(lengths[0] * head);
+      pulse.setAttribute('transform', `translate(${pt.x.toFixed(2)} ${pt.y.toFixed(2)})`);
+      pulse.style.opacity = head > 0.02 && head < 0.985 ? '1' : '0';
+    }
+  };
+
+  if (prefersReduced) {
+    lines.forEach((l) => {
+      l.style.strokeDasharray = 'none';
+      l.style.strokeDashoffset = '0';
+    });
+    dots.forEach((d) => { d.style.opacity = '1'; });
+    if (pulse) pulse.style.opacity = '0';
+    return;
+  }
+
   lines.forEach((l, i) => {
     l.style.strokeDasharray = String(lengths[i]);
     l.style.strokeDashoffset = String(lengths[i]);
   });
   dots.forEach((d) => { d.style.opacity = '0'; });
+  draw(0);
 
   let ticking = false;
   let lastProgress = -1;
@@ -195,20 +230,13 @@ function initConnectingRoutes(): void {
     ticking = false;
     const rect = section.getBoundingClientRect();
     const vh = window.innerHeight || 1;
-    // Progress: 0 when section top hits viewport bottom, 1 as it reaches 20% from top.
-    const raw = (vh - rect.top) / (vh * 0.8);
-    const progress = Math.min(1, Math.max(0, raw));
-    if (Math.abs(progress - lastProgress) < 0.002) return;
+    // Full traversal: section top at viewport bottom (0) → section bottom at viewport top (1).
+    const total = vh + rect.height;
+    const passed = vh - rect.top;
+    const progress = Math.min(1, Math.max(0, passed / total));
+    if (Math.abs(progress - lastProgress) < 0.0015) return;
     lastProgress = progress;
-
-    lines.forEach((l, i) => {
-      const p = i === 0 ? progress : Math.min(1, Math.max(0, (progress - 0.18) / 0.82));
-      l.style.strokeDashoffset = String(lengths[i] * (1 - p));
-    });
-    dots.forEach((d, i) => {
-      const p = Math.min(1, Math.max(0, (progress - 0.3 - i * 0.12) / 0.4));
-      d.style.opacity = String(p);
-    });
+    draw(progress);
   };
 
   const onScroll = (): void => {

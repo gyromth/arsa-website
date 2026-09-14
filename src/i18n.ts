@@ -29,13 +29,13 @@ export const translations = {
     'hero.stat.label': 'nationalities',
     'hero.scroll': 'Scroll',
 
-    'about.label': 'About ARSA',
-    'about.heading': 'Who we are',
+    'about.label': 'ARSA International',
+    'about.heading': 'About ARSA',
     'about.statement': 'Helping businesses find skilled professionals across borders and build reliable teams for long-term growth.',
     'about.text': 'ARSA International is a recruitment company that helps businesses find the right people. We work across international markets — building reliable channels for hiring professionals from Asia and other regions, so employers can focus on growth while we handle the workforce.',
 
     'services.label': 'Services',
-    'services.heading': 'What we do',
+    'services.heading': 'What we do?',
     'services.01.title': 'International recruitment',
     'services.01.text': 'We source and place qualified professionals from international markets, matching skills and experience to your specific roles.',
     'services.02.title': 'Workforce solutions',
@@ -48,7 +48,7 @@ export const translations = {
     'connecting.text': 'Building bridges between businesses and talent — wherever the best people are.',
 
     'process.label': 'Process',
-    'process.heading': 'How it works',
+    'process.heading': 'How it works?',
     'process.01.title': 'You describe the task',
     'process.01.text': 'Roles, volume, timeline, location.',
     'process.02.title': 'We shape the solution',
@@ -65,6 +65,7 @@ export const translations = {
     'footer.copy': '© 2026 ARSA International',
 
     'a11y.lang': 'en',
+    'a11y.logo': 'ARSA International',
     'a11y.language': 'Language',
     'a11y.menu.open': 'Open menu',
     'a11y.menu.close': 'Close menu',
@@ -96,13 +97,13 @@ export const translations = {
     'hero.stat.label': 'национальностей',
     'hero.scroll': 'Вниз',
 
-    'about.label': 'О ARSA',
-    'about.heading': 'Кто мы',
+    'about.label': 'ARSA International',
+    'about.heading': 'Об ARSA',
     'about.statement': 'Помогаем бизнесу находить квалифицированных специалистов за рубежом и выстраивать надёжные команды для долгосрочного роста.',
     'about.text': 'ARSA International — рекрутинговая компания, которая помогает бизнесу находить нужных людей. Мы работаем на международных рынках — выстраиваем надёжные каналы найма специалистов из Азии и других регионов, чтобы работодатели могли сосредоточиться на развитии бизнеса.',
 
     'services.label': 'Услуги',
-    'services.heading': 'Что мы делаем',
+    'services.heading': 'Что мы делаем?',
     'services.01.title': 'Международный подбор персонала',
     'services.01.text': 'Находим и подбираем квалифицированных специалистов на международном рынке, соответствующих вашим требованиям и позициям.',
     'services.02.title': 'Кадровые решения',
@@ -115,7 +116,7 @@ export const translations = {
     'connecting.text': 'Выстраиваем мосты между бизнесом и талантами — там, где лучшие специалисты.',
 
     'process.label': 'Процесс',
-    'process.heading': 'Как это работает',
+    'process.heading': 'Как это работает?',
     'process.01.title': 'Вы описываете задачу',
     'process.01.text': 'Позиции, объём, сроки, регион.',
     'process.02.title': 'Мы формируем решение',
@@ -132,6 +133,7 @@ export const translations = {
     'footer.copy': '© 2026 ARSA International',
 
     'a11y.lang': 'ru',
+    'a11y.logo': 'ARSA International',
     'a11y.language': 'Язык',
     'a11y.menu.open': 'Открыть меню',
     'a11y.menu.close': 'Закрыть меню',
