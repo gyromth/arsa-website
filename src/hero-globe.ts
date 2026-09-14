@@ -146,6 +146,8 @@ export function initHeroGlobe(): void {
   const routesG = document.querySelector<SVGGElement>('.hero-globe__routes');
   const planesG = document.querySelector<SVGGElement>('.hero-globe__planes');
   if (!section || !wrap || !world || !gridPath || !landPath || !pointsG || !routesG || !planesG) return;
+  // Desktop-only interactive globe; mobile keeps the existing composition
+  if (!window.matchMedia('(min-width: 960px)').matches) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hint = wrap.querySelector<HTMLElement>('.hero-globe__hint');
@@ -376,9 +378,9 @@ export function initHeroGlobe(): void {
     const dy = e.clientY - lastY;
     lastX = e.clientX;
     lastY = e.clientY;
-    view.lon = Math.max(-LON_WINDOW, Math.min(LON_WINDOW, view.lon + dx * 0.3));
-    view.lat = Math.max(-LAT_WINDOW, Math.min(LAT_WINDOW, view.lat - dy * 0.16));
-    velLon = dx * 0.3;
+    view.lon = Math.max(-LON_WINDOW, Math.min(LON_WINDOW, view.lon - dx * 0.3));
+    view.lat = Math.max(-LAT_WINDOW, Math.min(LAT_WINDOW, view.lat + dy * 0.18));
+    velLon = -dx * 0.3;
     render();
     e.preventDefault();
   });

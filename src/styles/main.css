@@ -649,7 +649,7 @@ html.html--booting body { visibility: hidden; }
 .hero-globe-wrap {
   position: relative;
   width: 100%;
-  max-width: 470px;
+  max-width: clamp(320px, 30vw, 425px);
   opacity: 0;
   transform: translateY(40px) scale(0.94);
   transition: opacity 1.2s var(--ease-out-expo) 0.35s, transform 1.2s var(--ease-out-expo) 0.35s;
@@ -688,7 +688,8 @@ html.html--booting body { visibility: hidden; }
 }
 
 .hero-globe__world {
-  will-change: transform;
+  transform-box: view-box;
+  transform-origin: 300px 300px;
 }
 
 .hero-globe__land {
@@ -703,7 +704,10 @@ html.html--booting body { visibility: hidden; }
   opacity: 0.95;
 }
 
-.hero-globe__route {
+.hero-globe__routes path {
+  stroke: #9cc4ff;
+  stroke-width: 1.8;
+  stroke-linecap: round;
   filter: drop-shadow(0 0 3px rgba(127, 176, 255, 0.55));
 }
 
@@ -716,7 +720,7 @@ html.html--booting body { visibility: hidden; }
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -0.4rem;
+  bottom: 0.9rem;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;

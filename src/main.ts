@@ -331,10 +331,31 @@ function initGlobe(): void {
     }
   });
 
+  const isDesktop = window.matchMedia('(min-width: 960px)').matches;
+
+  // Desktop Global Reach: calm scroll-driven visual — all routes remain
+  // visible, the one aligned with scroll progress is highlighted; no markers.
+  const drawStatic = (p: number): void => {
+    const rotation = -14 + 22 * p;
+    world.style.transform = `rotate(${rotation.toFixed(2)}deg)`;
+    const idx = Math.min(routes.length - 1, Math.max(0, Math.floor(p * routes.length)));
+    routes.forEach((r, i) => {
+      r.style.strokeDasharray = 'none';
+      r.style.strokeDashoffset = '0';
+      r.style.opacity = i === idx ? '0.95' : '0.32';
+    });
+    markers.forEach((m) => (m.style.opacity = '0'));
+  };
+
   const draw = (p: number): void => {
     // Globe rotation follows scroll (forward / reverse).
     const rotation = -22 + 44 * p;
     world.style.transform = `rotate(${rotation.toFixed(2)}deg)`;
+
+    if (isDesktop) {
+      drawStatic(p);
+      return;
+    }
 
     const total = routes.length;
     const idx = Math.min(total - 1, Math.floor(p * total));
@@ -369,6 +390,10 @@ function initGlobe(): void {
     });
   };
 
+  if (isDesktop) {
+    drawStatic(0.35);
+    return;
+  }
   if (prefersReduced) {
     // Static globe: several routes drawn, no markers, no rotation motion.
     routes.forEach((r, i) => {
