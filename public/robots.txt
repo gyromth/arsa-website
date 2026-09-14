@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: replace with the production domain once assigned.
+Sitemap: https://arsa.37-46-18-131.sslip.io/sitemap.xml

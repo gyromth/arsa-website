@@ -19,6 +19,7 @@ export const translations = {
     'nav.cta': "Let's talk",
 
     'hero.eyebrow': 'International Recruitment',
+    'hero.title.full': 'People who help your business move forward',
     'hero.title.1': 'People who',
     'hero.title.2': 'help your business',
     'hero.title.3': 'move forward',
@@ -90,6 +91,7 @@ export const translations = {
     'nav.cta': 'Связаться',
 
     'hero.eyebrow': 'Международный рекрутинг',
+    'hero.title.full': 'Люди, которые помогают вашему бизнесу расти',
     'hero.title.1': 'Люди, которые',
     'hero.title.2': 'помогают вашему',
     'hero.title.3': 'бизнесу расти',

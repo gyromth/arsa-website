@@ -1,5 +1,6 @@
 import './styles/main.css';
 import { translations, type Lang, type TranslationKey } from './i18n';
+import { config } from './config';
 
 /**
  * ARSA International — Main entry point
@@ -127,6 +128,19 @@ function updateSEO(lang: Lang): void {
   if (ogDesc) ogDesc.setAttribute('content', t['seo.og:description']);
   const ogLocale = document.querySelector('meta[property="og:locale"]');
   if (ogLocale) ogLocale.setAttribute('content', t['seo.og:locale']);
+
+  const twTitle = document.querySelector('meta[name="twitter:title"]');
+  if (twTitle) twTitle.setAttribute('content', t['seo.og:title']);
+  const twDesc = document.querySelector('meta[name="twitter:description"]');
+  if (twDesc) twDesc.setAttribute('content', t['seo.og:description']);
+}
+
+// ── Site URL (canonical / og:url) ──────────────────────────
+function applySiteUrl(): void {
+  const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (canonical) canonical.href = config.site.url;
+  const ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.setAttribute('content', config.site.url);
 }
 
 function initLangSwitch(): void {
@@ -396,6 +410,7 @@ function initSmoothAnchors(): void {
 // ── Init ───────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initLangSwitch();
+  applySiteUrl();
   startTypewriter();
   initHeroFigure();
   initPointerGlows();
