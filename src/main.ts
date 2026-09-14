@@ -23,6 +23,75 @@ function setLang(lang: Lang): void {
   updateSEO(lang);
   document.documentElement.lang = lang;
   document.documentElement.setAttribute('data-lang', lang);
+  restartTypewriter();
+}
+
+// ── Hero accent typewriter ─────────────────────────────────
+const TYPE_MS = 85; // type per char
+const DELETE_MS = 55; // delete per char
+const HOLD_MS = 1300; // pause after full phrase
+const GAP_MS = 450; // pause before next phrase
+
+let typewriterTimer = 0;
+
+function heroTypewriterPhrases(lang: Lang): string[] {
+  const t = translations[lang];
+  return [t['hero.typewriter.1'], t['hero.typewriter.2'], t['hero.typewriter.3']];
+}
+
+function startTypewriter(): void {
+  const text = document.querySelector<HTMLElement>('.title-accent__text');
+  const wrap = document.querySelector<HTMLElement>('.title-accent');
+  if (!text || !wrap) return;
+
+  const phrases = heroTypewriterPhrases(getCurrentLang()).filter(Boolean);
+  if (phrases.length === 0) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced || phrases.length === 1) {
+    // Static final phrase, no typing/blinking
+    text.textContent = phrases[0];
+    wrap.classList.remove('is-typing');
+    return;
+  }
+
+  wrap.classList.add('is-typing');
+  text.textContent = '';
+
+  let idx = 0;
+  let count = 0;
+  let deleting = false;
+
+  const tick = (): void => {
+    const phrase = phrases[idx];
+    if (!deleting) {
+      count += 1;
+      text.textContent = phrase.slice(0, count);
+      if (count >= phrase.length) {
+        deleting = true;
+        typewriterTimer = window.setTimeout(tick, HOLD_MS);
+        return;
+      }
+      typewriterTimer = window.setTimeout(tick, TYPE_MS);
+    } else {
+      count -= 1;
+      text.textContent = phrase.slice(0, Math.max(0, count));
+      if (count <= 0) {
+        deleting = false;
+        idx = (idx + 1) % phrases.length;
+        typewriterTimer = window.setTimeout(tick, GAP_MS);
+        return;
+      }
+      typewriterTimer = window.setTimeout(tick, DELETE_MS);
+    }
+  };
+
+  typewriterTimer = window.setTimeout(tick, 150); // start typing quickly (no empty-line flash)
+}
+
+function restartTypewriter(): void {
+  window.clearTimeout(typewriterTimer);
+  startTypewriter();
 }
 
 function applyTranslations(lang: Lang): void {
@@ -327,6 +396,7 @@ function initSmoothAnchors(): void {
 // ── Init ───────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initLangSwitch();
+  startTypewriter();
   initHeroFigure();
   initPointerGlows();
   initReveal();

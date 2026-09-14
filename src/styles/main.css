@@ -80,6 +80,7 @@ html.html--booting body { visibility: hidden; }
     scroll-behavior: auto !important;
   }
   .reveal, .hero__title, .hero__figure, .hero__float-label { opacity: 1 !important; transform: none !important; }
+  .title-accent__cursor { display: none !important; }
 }
 
 /* ── Grain (CTA only — hero kept clean) ─────── */
@@ -595,9 +596,35 @@ html.html--booting body { visibility: hidden; }
   display: block;
 }
 
+/* Accent line reserves one stable line height; text never wraps */
+.title-line--accent {
+  min-height: 1.12em;
+}
+
 .title-accent {
   color: var(--accent);
   text-shadow: 0 0 28px rgba(37, 99, 235, 0.5);
+  white-space: nowrap;
+}
+
+.title-accent__cursor {
+  display: none;
+  width: 2px;
+  height: 0.86em;
+  margin-left: 0.06em;
+  vertical-align: -0.06em;
+  border-radius: 1px;
+  background: #8ab4ff;
+}
+
+.title-accent.is-typing .title-accent__cursor {
+  display: inline-block;
+  animation: cursorBlink 1.05s steps(1, end) infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
 }
 
 .hero__subtitle {
