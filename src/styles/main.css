@@ -471,6 +471,23 @@ html.html--booting body { visibility: hidden; }
   50% { transform: translate(-42px, -32px) scale(1.16); opacity: 0.34; }
 }
 
+/* Mobile ambient motion — 3 large clouds, slow diagonal drift, staggered */
+@keyframes blobMobileA {
+  0%, 100% { transform: translate(-60px, -40px) scale(0.95); opacity: 0.42; }
+  33% { transform: translate(60px, 80px) scale(1.16); opacity: 0.58; }
+  66% { transform: translate(40px, -70px) scale(0.9); opacity: 0.38; }
+}
+
+@keyframes blobMobileB {
+  0%, 100% { transform: translate(70px, 50px) scale(0.96); opacity: 0.28; }
+  50% { transform: translate(-90px, -80px) scale(1.22); opacity: 0.44; }
+}
+
+@keyframes blobMobileD {
+  0%, 100% { transform: translate(20px, 60px) scale(1); opacity: 0.26; }
+  50% { transform: translate(100px, -50px) scale(1.26); opacity: 0.4; }
+}
+
 /* Soft cursor-follow light — reusable across dark blocks */
 .pointer-glow,
 .hero__pointer-glow {
@@ -1152,13 +1169,13 @@ html.html--booting body { visibility: hidden; }
   /* Scroll indicator is not needed on touch — the About section peeks below */
   .hero__scroll { display: none; }
 
-  /* Lighter ambient motion on mobile: fewer layers, lower blur/opacity */
+  /* Mobile ambient motion: 3 large clouds, slow wide drift, staggered */
   .hero__blob { filter: blur(60px); }
   .hero__blob--3,
   .hero__blob--5 { display: none; }
-  .hero__blob--1 { opacity: 0.45; }
-  .hero__blob--2 { opacity: 0.3; }
-  .hero__blob--4 { opacity: 0.28; }
+  .hero__blob--1 { opacity: 0.5; animation: blobMobileA 20s ease-in-out -3s infinite; }
+  .hero__blob--2 { opacity: 0.34; animation: blobMobileB 28s ease-in-out -11s infinite; }
+  .hero__blob--4 { opacity: 0.32; animation: blobMobileD 24s ease-in-out -7s infinite; }
 }
 
 /* Very narrow screens: keep the headline strong but wrapped cleanly */
