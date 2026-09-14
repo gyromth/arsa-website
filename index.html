@@ -26,7 +26,7 @@
           <a href="#process" class="header__nav-link" data-i18n="nav.process">Process</a>
         </nav>
         <div class="header__actions">
-          <div class="lang-switch" role="group" aria-label="Language">
+          <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="a11y.language:aria-label">
             <button class="lang-switch__btn lang-switch__btn--active" data-lang="en" aria-pressed="true">EN</button>
             <button class="lang-switch__btn" data-lang="ru" aria-pressed="false">RU</button>
           </div>
@@ -41,7 +41,7 @@
         <a href="#services" class="mobile-nav__link" data-i18n="nav.services">Services</a>
         <a href="#process" class="mobile-nav__link" data-i18n="nav.process">Process</a>
         <div class="mobile-nav__lang">
-          <div class="lang-switch lang-switch--mobile" role="group" aria-label="Language">
+          <div class="lang-switch lang-switch--mobile" role="group" aria-label="Language" data-i18n-attr="a11y.language:aria-label">
             <button class="lang-switch__btn lang-switch__btn--active" data-lang="en" aria-pressed="true">EN</button>
             <button class="lang-switch__btn" data-lang="ru" aria-pressed="false">RU</button>
           </div>
@@ -69,62 +69,62 @@
               <span class="hero__meta-line"></span>
               <span class="hero__meta-label" data-i18n="hero.eyebrow">International Recruitment</span>
             </div>
-            <h1 class="hero__title" data-i18n="hero.title">
-              <span class="title-line">People who</span>
-              <span class="title-line">help your business</span>
-              <span class="title-line"><span class="title-accent">move forward</span></span>
+            <h1 class="hero__title">
+              <span class="title-line" data-i18n="hero.title.1">People who</span>
+              <span class="title-line" data-i18n="hero.title.2">help your business</span>
+              <span class="title-line"><span class="title-accent" data-i18n="hero.title.3">move forward</span></span>
             </h1>
             <p class="hero__subtitle reveal" data-i18n="hero.subtitle">We connect companies with skilled professionals from around the world — reliably, transparently, and with full support at every stage.</p>
             <div class="hero__actions reveal">
               <a href="#contact" class="btn btn--accent btn--lg" data-i18n="hero.cta">Let's talk</a>
-              <a href="#about" class="btn btn--ghost btn--lg">Learn more</a>
+              <a href="#about" class="btn btn--ghost btn--lg" data-i18n="hero.cta.secondary">Learn more</a>
             </div>
           </div>
 
           <div class="hero__visual">
-            <!-- Worker silhouette — SVG illustration -->
+            <!-- Industrial hard-hat silhouette — abstract, no character reading -->
             <div class="hero__figure">
-              <svg class="hero__worker" viewBox="0 0 400 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Hard hat -->
-                <path d="M140 120 C140 80 180 50 200 48 C220 50 260 80 260 120 L270 130 L130 130 Z" fill="var(--accent)" opacity="0.9"/>
-                <rect x="125" y="128" width="150" height="8" rx="4" fill="var(--accent)" opacity="0.7"/>
-                <!-- Head -->
-                <ellipse cx="200" cy="155" rx="38" ry="42" fill="#2a2520"/>
-                <!-- Body / vest -->
-                <path d="M150 195 L130 340 L160 345 L175 250 L200 260 L225 250 L240 345 L270 340 L250 195 Z" fill="#1a1816"/>
+              <svg class="hero__worker" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <!-- Technical frame -->
+                <circle cx="200" cy="200" r="186" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <circle cx="200" cy="200" r="150" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="3 9"/>
+                <path d="M200 6V26M200 374V394M6 200H26M374 200H394" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+                <!-- Torso / shoulders -->
+                <path d="M116 356 C116 290 152 258 200 258 C248 258 284 290 284 356 Z" fill="#151d2b"/>
+                <path d="M116 356 C116 290 152 258 200 258 L200 356 Z" fill="#101724"/>
                 <!-- Safety vest stripes -->
-                <rect x="165" y="210" width="70" height="4" rx="2" fill="var(--accent)" opacity="0.8"/>
-                <rect x="160" y="250" width="80" height="4" rx="2" fill="var(--accent)" opacity="0.6"/>
-                <rect x="155" y="290" width="90" height="4" rx="2" fill="var(--accent)" opacity="0.4"/>
-                <!-- Arms -->
-                <path d="M150 200 L110 300 L125 305 L155 215" fill="#1a1816"/>
-                <path d="M250 200 L290 280 L280 290 L245 215" fill="#1a1816"/>
-                <!-- Hands -->
-                <circle cx="115" cy="305" r="8" fill="#2a2520"/>
-                <circle cx="285" cy="285" r="8" fill="#2a2520"/>
-                <!-- Legs -->
-                <rect x="160" y="340" width="30" height="120" rx="8" fill="#151312"/>
-                <rect x="210" y="340" width="30" height="120" rx="8" fill="#151312"/>
-                <!-- Boots -->
-                <rect x="152" y="450" width="45" height="18" rx="6" fill="#0c0c0c"/>
-                <rect x="203" y="450" width="45" height="18" rx="6" fill="#0c0c0c"/>
+                <path d="M148 302 H252" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" opacity="0.95"/>
+                <path d="M138 330 H262" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+                <!-- Neck -->
+                <rect x="182" y="226" width="36" height="44" rx="14" fill="#1a2331"/>
+                <!-- Head -->
+                <circle cx="200" cy="196" r="42" fill="#1a2331"/>
+                <!-- Hard hat dome -->
+                <path d="M154 192 C154 150 172 122 200 122 C228 122 246 150 246 192 Z" fill="var(--accent)"/>
+                <!-- Hard hat brim -->
+                <path d="M136 194 C160 185 240 185 264 194 C268 198 262 202 200 202 C138 202 132 198 136 194 Z" fill="var(--accent)"/>
+                <path d="M136 194 C160 185 240 185 264 194" stroke="rgba(255,255,255,0.28)" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- Helmet ridge -->
+                <path d="M200 122 V104" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+                <!-- Accent nodes -->
+                <circle cx="200" cy="200" r="3" fill="#ffffff" opacity="0.7"/>
+                <circle cx="116" cy="356" r="3" fill="var(--accent)" opacity="0.6"/>
+                <circle cx="284" cy="356" r="3" fill="var(--accent)" opacity="0.6"/>
               </svg>
-              <!-- Overlay gradient on figure -->
-              <div class="hero__figure-overlay"></div>
             </div>
 
-            <!-- Floating label -->
+            <!-- Floating stat label -->
             <div class="hero__float-label reveal">
-              <span class="hero__float-num">5+</span>
-              <span class="hero__float-text">markets</span>
+              <span class="hero__float-num" data-i18n="hero.stat.num">20+</span>
+              <span class="hero__float-text" data-i18n="hero.stat.label">nationalities</span>
             </div>
           </div>
         </div>
 
-        <div class="hero__scroll" aria-hidden="true">
-          <span class="hero__scroll-text">Scroll</span>
-          <div class="hero__scroll-line"></div>
-        </div>
+        <a href="#about" class="hero__scroll" aria-label="Scroll to content" data-i18n-attr="a11y.scroll:aria-label">
+          <span class="hero__scroll-text" data-i18n="hero.scroll">Scroll</span>
+          <span class="hero__scroll-line" aria-hidden="true"></span>
+        </a>
       </section>
 
       <!-- ═══════════════════════════════════════════
@@ -137,6 +137,7 @@
               <span class="section-label" data-i18n="about.label">About ARSA</span>
             </div>
             <div class="about__content reveal">
+              <h2 class="section-heading" data-i18n="about.heading">Who we are</h2>
               <p class="about__statement" data-i18n="about.statement">Helping businesses find skilled professionals across borders and build reliable teams for long-term growth.</p>
               <p class="about__text" data-i18n="about.text">ARSA International is a recruitment company that helps businesses find the right people. We work across international markets — building reliable channels for hiring professionals from Asia and other regions, so employers can focus on growth while we handle the workforce.</p>
             </div>
@@ -149,8 +150,9 @@
            ═══════════════════════════════════════════ -->
       <section class="services section" id="services">
         <div class="container">
-          <div class="services__header reveal">
-            <span class="section-label section-label--light" data-i18n="services.label">What we do</span>
+          <div class="section__header reveal">
+            <span class="section-label" data-i18n="services.label">Services</span>
+            <h2 class="section-heading section-heading--light" data-i18n="services.heading">What we do</h2>
           </div>
           <div class="services__list">
             <a href="#contact" class="service-row reveal">
@@ -159,7 +161,7 @@
                 <h3 class="service-row__title" data-i18n="services.01.title">International recruitment</h3>
                 <p class="service-row__text" data-i18n="services.01.text">We source and place qualified professionals from international markets, matching skills and experience to your specific roles.</p>
               </div>
-              <svg class="service-row__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              <svg class="service-row__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </a>
             <a href="#contact" class="service-row reveal">
               <span class="service-row__num">02</span>
@@ -167,7 +169,7 @@
                 <h3 class="service-row__title" data-i18n="services.02.title">Workforce solutions</h3>
                 <p class="service-row__text" data-i18n="services.02.text">From single specialist hires to large-scale staffing projects — we structure the hiring process around your business needs.</p>
               </div>
-              <svg class="service-row__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              <svg class="service-row__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </a>
             <a href="#contact" class="service-row reveal">
               <span class="service-row__num">03</span>
@@ -175,7 +177,7 @@
                 <h3 class="service-row__title" data-i18n="services.03.title">Full-cycle support</h3>
                 <p class="service-row__text" data-i18n="services.03.text">We manage the entire journey — from initial screening and candidate presentation through onboarding and ongoing coordination.</p>
               </div>
-              <svg class="service-row__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              <svg class="service-row__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </a>
           </div>
         </div>
@@ -184,14 +186,14 @@
       <!-- ═══════════════════════════════════════════
            CONNECTING — Visual statement
            ═══════════════════════════════════════════ -->
-      <section class="connecting section">
+      <section class="connecting section" id="connecting">
         <div class="connecting__visual" aria-hidden="true">
           <svg class="connecting__routes" viewBox="0 0 1200 400" fill="none" preserveAspectRatio="xMidYMid slice">
-            <path class="route-line" d="M-50 200 C150 150 300 250 500 200 C700 150 850 180 1000 200 C1100 210 1200 190 1300 180" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
-            <path class="route-line" d="M-30 280 C200 240 350 320 600 270 C800 220 950 260 1100 280 C1200 290 1300 270 1400 260" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-linecap="round"/>
-            <circle class="route-dot" cx="500" cy="200" r="5" fill="var(--accent)" opacity="0.6"/>
-            <circle class="route-dot" cx="200" cy="220" r="3" fill="var(--accent)" opacity="0.3"/>
-            <circle class="route-dot" cx="800" cy="180" r="4" fill="var(--accent)" opacity="0.45"/>
+            <path class="route-line" d="M-50 200 C150 150 300 250 500 200 C700 150 850 180 1000 200 C1100 210 1200 190 1300 180" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+            <path class="route-line" d="M-30 280 C200 240 350 320 600 270 C800 220 950 260 1100 280 C1200 290 1300 270 1400 260" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-linecap="round"/>
+            <circle class="route-dot" cx="500" cy="200" r="5" fill="var(--accent)" opacity="0.7"/>
+            <circle class="route-dot" cx="200" cy="220" r="3" fill="var(--accent)" opacity="0.4"/>
+            <circle class="route-dot" cx="800" cy="180" r="4" fill="var(--accent)" opacity="0.55"/>
           </svg>
         </div>
         <div class="container connecting__inner">
@@ -206,8 +208,9 @@
            ═══════════════════════════════════════════ -->
       <section class="process section" id="process">
         <div class="container">
-          <div class="process__header reveal">
-            <span class="section-label" data-i18n="process.label">How it works</span>
+          <div class="section__header reveal">
+            <span class="section-label" data-i18n="process.label">Process</span>
+            <h2 class="section-heading" data-i18n="process.heading">How it works</h2>
           </div>
           <div class="process__grid">
             <div class="process-step reveal">
@@ -241,7 +244,7 @@
             <p class="cta__text" data-i18n="cta.text">Tell us what you need — we'll propose a solution and outline the timeline.</p>
             <div class="cta__actions">
               <a href="https://t.me/YOUR_TELEGRAM_HANDLE" class="btn btn--accent btn--lg" target="_blank" rel="noopener noreferrer">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
                 <span data-i18n="cta.telegram">Write to Telegram</span>
               </a>
               <a href="mailto:info@arsa-international.com" class="btn btn--ghost-light btn--lg" data-i18n="cta.email">info@arsa-international.com</a>
@@ -271,7 +274,7 @@
         </div>
         <div class="footer__bottom">
           <span class="footer__copy" data-i18n="footer.copy">© 2026 ARSA International</span>
-          <div class="lang-switch lang-switch--footer" role="group" aria-label="Language">
+          <div class="lang-switch lang-switch--footer" role="group" aria-label="Language" data-i18n-attr="a11y.language:aria-label">
             <button class="lang-switch__btn lang-switch__btn--active" data-lang="en" aria-pressed="true">EN</button>
             <button class="lang-switch__btn" data-lang="ru" aria-pressed="false">RU</button>
           </div>

@@ -19,15 +19,23 @@ export const translations = {
     'nav.cta': "Let's talk",
 
     'hero.eyebrow': 'International Recruitment',
-    'hero.title': 'People who help<br>your business move forward',
+    'hero.title.1': 'People who',
+    'hero.title.2': 'help your business',
+    'hero.title.3': 'move forward',
     'hero.subtitle': 'We connect companies with skilled professionals from around the world — reliably, transparently, and with full support at every stage.',
     'hero.cta': "Let's talk",
+    'hero.cta.secondary': 'Learn more',
+    'hero.stat.num': '20+',
+    'hero.stat.label': 'nationalities',
+    'hero.scroll': 'Scroll',
 
     'about.label': 'About ARSA',
+    'about.heading': 'Who we are',
     'about.statement': 'Helping businesses find skilled professionals across borders and build reliable teams for long-term growth.',
     'about.text': 'ARSA International is a recruitment company that helps businesses find the right people. We work across international markets — building reliable channels for hiring professionals from Asia and other regions, so employers can focus on growth while we handle the workforce.',
 
-    'services.label': 'What we do',
+    'services.label': 'Services',
+    'services.heading': 'What we do',
     'services.01.title': 'International recruitment',
     'services.01.text': 'We source and place qualified professionals from international markets, matching skills and experience to your specific roles.',
     'services.02.title': 'Workforce solutions',
@@ -39,7 +47,8 @@ export const translations = {
     'connecting.title': 'Connecting people<br>across borders',
     'connecting.text': 'Building bridges between businesses and talent — wherever the best people are.',
 
-    'process.label': 'How it works',
+    'process.label': 'Process',
+    'process.heading': 'How it works',
     'process.01.title': 'You describe the task',
     'process.01.text': 'Roles, volume, timeline, location.',
     'process.02.title': 'We shape the solution',
@@ -56,10 +65,12 @@ export const translations = {
     'footer.copy': '© 2026 ARSA International',
 
     'a11y.lang': 'en',
+    'a11y.language': 'Language',
     'a11y.menu.open': 'Open menu',
     'a11y.menu.close': 'Close menu',
     'a11y.nav.main': 'Main navigation',
     'a11y.nav.mobile': 'Mobile navigation',
+    'a11y.scroll': 'Scroll to content',
   },
 
   ru: {
@@ -75,15 +86,23 @@ export const translations = {
     'nav.cta': 'Связаться',
 
     'hero.eyebrow': 'Международный рекрутинг',
-    'hero.title': 'Люди, которые помогают<br>вашему бизнесу двигаться дальше',
+    'hero.title.1': 'Люди, которые',
+    'hero.title.2': 'помогают вашему',
+    'hero.title.3': 'бизнесу расти',
     'hero.subtitle': 'Мы соединяем компании с квалифицированными специалистами со всего мира — надёжно, прозрачно и с полным сопровождением на каждом этапе.',
     'hero.cta': 'Давайте обсудим',
+    'hero.cta.secondary': 'Узнать больше',
+    'hero.stat.num': '20+',
+    'hero.stat.label': 'национальностей',
+    'hero.scroll': 'Вниз',
 
     'about.label': 'О ARSA',
+    'about.heading': 'Кто мы',
     'about.statement': 'Помогаем бизнесу находить квалифицированных специалистов за рубежом и выстраивать надёжные команды для долгосрочного роста.',
     'about.text': 'ARSA International — рекрутинговая компания, которая помогает бизнесу находить нужных людей. Мы работаем на международных рынках — выстраиваем надёжные каналы найма специалистов из Азии и других регионов, чтобы работодатели могли сосредоточиться на развитии бизнеса.',
 
-    'services.label': 'Что мы делаем',
+    'services.label': 'Услуги',
+    'services.heading': 'Что мы делаем',
     'services.01.title': 'Международный подбор персонала',
     'services.01.text': 'Находим и подбираем квалифицированных специалистов на международном рынке, соответствующих вашим требованиям и позициям.',
     'services.02.title': 'Кадровые решения',
@@ -95,7 +114,8 @@ export const translations = {
     'connecting.title': 'Соединяем людей<br>через границы',
     'connecting.text': 'Выстраиваем мосты между бизнесом и талантами — там, где лучшие специалисты.',
 
-    'process.label': 'Как это работает',
+    'process.label': 'Процесс',
+    'process.heading': 'Как это работает',
     'process.01.title': 'Вы описываете задачу',
     'process.01.text': 'Позиции, объём, сроки, регион.',
     'process.02.title': 'Мы формируем решение',
@@ -112,10 +132,12 @@ export const translations = {
     'footer.copy': '© 2026 ARSA International',
 
     'a11y.lang': 'ru',
+    'a11y.language': 'Язык',
     'a11y.menu.open': 'Открыть меню',
     'a11y.menu.close': 'Закрыть меню',
     'a11y.nav.main': 'Основная навигация',
     'a11y.nav.mobile': 'Мобильная навигация',
+    'a11y.scroll': 'Прокрутить к содержимому',
   },
 } as const;
 

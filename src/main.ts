@@ -156,27 +156,70 @@ function initHeroFigure(): void {
   setTimeout(() => figure.classList.add('visible'), 500);
 }
 
-// ── Connecting Routes Animation ────────────────────────────
+// ── Connecting Routes — scroll-linked animation ────────────
 function initConnectingRoutes(): void {
+  const section = document.querySelector<HTMLElement>('.connecting');
+  const lines = Array.from(document.querySelectorAll<SVGPathElement>('.route-line'));
+  const dots = Array.from(document.querySelectorAll<SVGCircleElement>('.route-dot'));
+  if (!section || lines.length === 0) return;
+
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const visual = document.querySelector('.connecting__visual');
-  if (!visual) return;
   if (prefersReduced) {
-    visual.classList.add('animated');
+    lines.forEach((l) => {
+      l.style.strokeDasharray = 'none';
+      l.style.strokeDashoffset = '0';
+    });
+    dots.forEach((d) => { d.style.opacity = '1'; });
     return;
   }
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          visual.classList.add('animated');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.3 },
-  );
-  observer.observe(visual);
+
+  // Cache path lengths once.
+  const lengths = lines.map((l) => {
+    try {
+      return l.getTotalLength();
+    } catch {
+      return 1000;
+    }
+  });
+
+  lines.forEach((l, i) => {
+    l.style.strokeDasharray = String(lengths[i]);
+    l.style.strokeDashoffset = String(lengths[i]);
+  });
+  dots.forEach((d) => { d.style.opacity = '0'; });
+
+  let ticking = false;
+  let lastProgress = -1;
+
+  const update = (): void => {
+    ticking = false;
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight || 1;
+    // Progress: 0 when section top hits viewport bottom, 1 as it reaches 20% from top.
+    const raw = (vh - rect.top) / (vh * 0.8);
+    const progress = Math.min(1, Math.max(0, raw));
+    if (Math.abs(progress - lastProgress) < 0.002) return;
+    lastProgress = progress;
+
+    lines.forEach((l, i) => {
+      const p = i === 0 ? progress : Math.min(1, Math.max(0, (progress - 0.18) / 0.82));
+      l.style.strokeDashoffset = String(lengths[i] * (1 - p));
+    });
+    dots.forEach((d, i) => {
+      const p = Math.min(1, Math.max(0, (progress - 0.3 - i * 0.12) / 0.4));
+      d.style.opacity = String(p);
+    });
+  };
+
+  const onScroll = (): void => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
 }
 
 // ── Smooth Anchor ──────────────────────────────────────────
