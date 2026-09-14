@@ -876,17 +876,17 @@ html.html--booting body { visibility: hidden; }
 .connecting__visual {
   display: flex;
   justify-content: center;
-  margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem);
+  margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
 }
 
 /* Globe */
 .globe {
-  width: clamp(210px, 42vw, 340px);
+  width: clamp(200px, 40vw, 340px);
   height: auto;
 }
 
 @media (max-width: 480px) {
-  .globe { width: clamp(190px, 70vw, 250px); }
+  .globe { width: clamp(150px, 55vw, 200px); }
 }
 
 .globe__world {
@@ -896,7 +896,7 @@ html.html--booting body { visibility: hidden; }
 .globe__route {
   fill: none;
   stroke: #6ea8ff;
-  stroke-width: 1.6;
+  stroke-width: 1.5;
   stroke-linecap: round;
   opacity: 0;
 }
@@ -905,10 +905,13 @@ html.html--booting body { visibility: hidden; }
   fill: #8ab4ff;
 }
 
-.globe__marker {
-  fill: #dbeaff;
-  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.8));
+.globe__plane {
   opacity: 0;
+}
+
+.globe__plane path {
+  fill: #e6f0ff;
+  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.8));
 }
 
 .connecting__inner {

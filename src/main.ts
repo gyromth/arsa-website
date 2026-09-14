@@ -316,7 +316,7 @@ function initGlobe(): void {
   const section = document.querySelector<HTMLElement>('.connecting');
   const world = document.querySelector<SVGGElement>('.globe__world');
   const routes = Array.from(document.querySelectorAll<SVGPathElement>('.globe__route'));
-  const markers = Array.from(document.querySelectorAll<SVGCircleElement>('.globe__marker'));
+  const markers = Array.from(document.querySelectorAll<SVGGElement>('.globe__plane'));
   if (!section || !world || routes.length === 0) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -350,8 +350,17 @@ function initGlobe(): void {
     });
     markers.forEach((m, i) => {
       if (i === idx && local < 0.8) {
-        const pt = routes[idx].getPointAtLength(lengths[idx] * Math.min(1, local / 0.8));
-        m.setAttribute('transform', `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)})`);
+        const drawP = Math.min(1, local / 0.8);
+        const t = lengths[idx] * drawP;
+        const pt = routes[idx].getPointAtLength(t);
+        // Tangent direction for the plane's heading.
+        const t2 = Math.min(lengths[idx], t + 2);
+        const pt2 = routes[idx].getPointAtLength(t2);
+        const ang = (Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180) / Math.PI;
+        m.setAttribute(
+          'transform',
+          `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)}) rotate(${(ang + 90).toFixed(1)})`,
+        );
         m.style.opacity = '1';
       } else {
         m.style.opacity = '0';
