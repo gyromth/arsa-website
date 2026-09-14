@@ -136,6 +136,62 @@ img, svg { display: block; max-width: 100%; }
   .header__cta { display: inline-flex; }
 }
 
+/* ── Header actions group ────────────────────── */
+.header__actions {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .header__actions { display: flex; }
+}
+
+/* ── Language switch ─────────────────────────── */
+.lang-switch {
+  display: flex;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.lang-switch__btn {
+  font-family: var(--ff);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.35em 0.7em;
+  border: none;
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: all 200ms var(--ease);
+  line-height: 1;
+}
+
+.lang-switch__btn:hover {
+  color: var(--ink);
+}
+
+.lang-switch__btn--active {
+  background: var(--ink);
+  color: var(--canvas);
+}
+
+.lang-switch--mobile {
+  border-color: var(--border-strong);
+}
+
+.lang-switch--mobile .lang-switch__btn--active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.mobile-nav__lang {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
 /* Burger */
 .header__burger {
   display: flex;
