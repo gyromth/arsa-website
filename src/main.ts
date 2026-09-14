@@ -2,7 +2,7 @@ import './styles/main.css';
 
 /**
  * ARSA International — Main entry point
- * Handles: scroll reveals, mobile menu, header scroll, counter animation, process line.
+ * Warm editorial design — scroll reveals, mobile menu, header, hero SVG animation.
  */
 
 // ── Scroll Reveal ──────────────────────────────────────────
@@ -22,7 +22,7 @@ function initReveal(): void {
         }
       });
     },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' },
   );
 
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
@@ -48,83 +48,34 @@ function initMobileMenu(): void {
   });
 }
 
-// ── Header Scroll ──────────────────────────────────────────
-function initHeaderScroll(): void {
-  const header = document.getElementById('header');
-  if (!header) return;
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        header.classList.toggle('header--scrolled', window.scrollY > 50);
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
-}
-
-// ── Counter Animation ──────────────────────────────────────
-function initCounters(): void {
+// ── Hero SVG Line Animation ────────────────────────────────
+function initHeroLines(): void {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const counters = document.querySelectorAll<HTMLElement>('[data-count]');
-  if (!counters.length) return;
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target as HTMLElement;
-          const target = parseInt(el.dataset.count ?? '0', 10);
-          if (prefersReduced) {
-            el.textContent = String(target);
-          } else {
-            animateCounter(el, target);
-          }
-          observer.unobserve(el);
-        }
-      });
-    },
-    { threshold: 0.5 },
-  );
-
-  counters.forEach((c) => observer.observe(c));
-}
-
-function animateCounter(el: HTMLElement, target: number): void {
-  const duration = 1500;
-  const start = performance.now();
-
-  function step(now: number) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-    el.textContent = String(Math.round(eased * target));
-    if (progress < 1) requestAnimationFrame(step);
+  if (prefersReduced) {
+    document.querySelectorAll('.hero-line-path').forEach((el) => el.classList.add('animated'));
+    const orbit = document.querySelector('.hero__orbit');
+    if (orbit) orbit.classList.add('visible');
+    return;
   }
-  requestAnimationFrame(step);
-}
-
-// ── Process Line Animation ─────────────────────────────────
-function initProcessLine(): void {
-  const line = document.querySelector<HTMLElement>('.process__line');
-  if (!line) return;
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          line.classList.add('animated');
+          document.querySelectorAll('.hero-line-path').forEach((path, i) => {
+            setTimeout(() => path.classList.add('animated'), i * 400);
+          });
+          const orbit = document.querySelector('.hero__orbit');
+          if (orbit) setTimeout(() => orbit.classList.add('visible'), 600);
           observer.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.4 },
+    { threshold: 0.2 },
   );
 
-  observer.observe(line);
+  const hero = document.getElementById('hero');
+  if (hero) observer.observe(hero);
 }
 
 // ── Smooth Anchor ──────────────────────────────────────────
@@ -146,8 +97,6 @@ function initSmoothAnchors(): void {
 document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initMobileMenu();
-  initHeaderScroll();
-  initCounters();
-  initProcessLine();
+  initHeroLines();
   initSmoothAnchors();
 });

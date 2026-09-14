@@ -9,118 +9,69 @@ export const config = {
   brand: {
     name: 'ARSA International',
     tagline: 'International Recruitment & Workforce Solutions',
-    slogan: 'Решения для бизнеса без границ',
-    description:
-      'Мы помогаем компаниям закрывать кадровые потребности за счёт профессионального подбора персонала на международном уровне — системно, прозрачно и с полным сопровождением.',
   },
 
   contacts: {
     telegram: 'https://t.me/YOUR_TELEGRAM_HANDLE',
     email: 'info@arsa-international.com',
-    phone: '+0 000 000 0000',
   },
 
   hero: {
-    title: 'ARSA International',
-    subtitle: 'Международный подбор персонала для вашего бизнеса',
-    cta: 'Обсудим вашу задачу',
+    eyebrow: 'International Recruitment',
+    title: 'People who help your business move forward',
+    subtitle:
+      'We connect companies with skilled professionals from around the world — reliably, transparently, and with full support at every stage.',
+    cta: 'Let\'s talk',
   },
 
   about: {
-    heading: 'О компании',
-    paragraphs: [
-      'ARSA International — это международная рекрутинговая компания, специализирующаяся на подборе квалифицированного и неквалифицированного персонала для компаний в различных отраслях.',
-      'Мы выстраиваем надёжные каналы привлечения сотрудников из стран Южной и Центральной Азии, Вьетнама, Филиппин и других регионов, обеспечивая работодателям стабильный доступ к трудовым ресурсам.',
-      'Наш подход — это сочетание глубокого понимания потребностей бизнеса, международного опыта и ответственного сопровождения на каждом этапе сотрудничества.',
-    ],
+    text: 'ARSA International is a recruitment company that helps businesses find the right people. We work across international markets — building reliable channels for hiring professionals from Asia and other regions, so employers can focus on growth while we handle the workforce.',
   },
 
   services: {
-    heading: 'Услуги',
+    heading: 'What we do',
     items: [
       {
-        icon: 'users',
-        title: 'Подбор персонала',
-        description:
-          'Профессиональный подбор сотрудников под конкретные должности, отрасль и требования работодателя.',
-      },
-      {
-        icon: 'globe',
-        title: 'Международный рекрутинг',
-        description:
-          'Организация найма сотрудников из-за рубежа с учётом миграционного и правового регулирования.',
-      },
-      {
-        icon: 'briefcase',
-        title: 'Кадровые решения',
-        description:
-          'Комплексное закрытие кадровых потребностей бизнеса — от массового найма до поиска узких специалистов.',
-      },
-      {
-        icon: 'shield',
-        title: 'Сопровождение',
-        description:
-          'Полное сопровождение процесса найма: от первичной коммуникации до выхода сотрудника на рабочее место.',
-      },
-      {
-        icon: 'handshake',
-        title: 'Партнёрская сеть',
-        description:
-          'Работа с проверенными поставщиками персонала в международных направлениях для стабильных поставок.',
-      },
-    ],
-  },
-
-  solutions: {
-    heading: 'Решения для работодателей',
-    description:
-      'Мы берём на себя организационную нагрузку по закрытию кадровых потребностей, чтобы вы могли сосредоточиться на развитии бизнеса.',
-    steps: [
-      {
         number: '01',
-        title: 'Расскажите о задаче',
-        text: 'Опишите позиции, количество сотрудников, сроки и регион. Мы проведём первичный анализ и предложим формат сотрудничества.',
+        title: 'International recruitment',
+        text: 'We source and place qualified professionals from international markets, matching skills and experience to your specific roles.',
       },
       {
         number: '02',
-        title: 'Формируем решение',
-        description:
-          'Подбираем оптимальный формат найма, определяем целевые рынки и согласовываем условия с работодателем.',
+        title: 'Workforce solutions',
+        text: 'From single specialist hires to large-scale staffing projects — we structure the hiring process around your business needs.',
       },
       {
         number: '03',
-        title: 'Получаете результат',
-        description:
-          'Вы получаете сотрудников, готовых к работе, с полным сопровождением на всех этапах найма и адаптации.',
+        title: 'Full-cycle support',
+        text: 'We manage the entire journey — from initial screening and candidate presentation through onboarding and ongoing coordination.',
       },
     ],
   },
 
   process: {
-    heading: 'Как мы работаем',
+    heading: 'How it works',
     steps: [
-      { number: '01', title: 'Обсуждаем потребность' },
-      { number: '02', title: 'Уточняем требования' },
-      { number: '03', title: 'Подбираем решение' },
-      { number: '04', title: 'Согласовываем условия' },
-      { number: '05', title: 'Сопровождаем взаимодействие' },
+      { number: '01', title: 'You describe the task', text: 'Roles, volume, timeline, location.' },
+      { number: '02', title: 'We shape the solution', text: 'Markets, format, terms.' },
+      { number: '03', title: 'We deliver results', text: 'People ready to work, fully supported.' },
     ],
   },
 
   cta: {
-    heading: 'Обсудим вашу задачу',
-    text: 'Расскажите о вашей кадровой потребности — мы предложим оптимальное решение и рассчитаем сроки.',
+    heading: 'Ready to discuss your staffing needs?',
+    text: 'Tell us what you need — we\'ll propose a solution and outline the timeline.',
+    button: 'Write to Telegram',
   },
 
   footer: {
-    copyright: `© ${new Date().getFullYear()} ARSA International. All rights reserved.`,
+    copyright: `© ${new Date().getFullYear()} ARSA International`,
   },
 
   seo: {
-    title: 'ARSA International — Международный подбор персонала',
+    title: 'ARSA International — International Recruitment & Workforce Solutions',
     description:
-      'ARSA International — международная рекрутинговая компания. Подбор персонала для бизнеса из стран Южной и Центральной Азии, Вьетнама, Филиппин.',
-    ogImage: '/og-image.png',
+      'ARSA International helps businesses find skilled professionals from international markets. Recruitment, workforce solutions, and full-cycle hiring support.',
   },
 } as const;
 
