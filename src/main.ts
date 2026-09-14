@@ -169,55 +169,75 @@ function initHeroFigure(): void {
   setTimeout(() => figure.classList.add('visible'), 400);
 }
 
-// ── Hero pointer glow (desktop, fine pointer, motion allowed) ──
-function initHeroPointerGlow(): void {
-  const hero = document.getElementById('hero');
-  const glow = document.querySelector<HTMLElement>('.hero__pointer-glow');
-  if (!hero || !glow) return;
-
-  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!finePointer || prefersReduced) return;
-
-  let targetX = hero.clientWidth / 2;
-  let targetY = hero.clientHeight / 2;
+// ── Reusable cursor-follow glow (desktop, fine pointer, motion allowed) ──
+function initPointerGlow(block: HTMLElement, glow: HTMLElement): void {
+  let targetX = block.clientWidth / 2;
+  let targetY = block.clientHeight / 2;
   let curX = targetX;
   let curY = targetY;
   let raf = 0;
-  let inView = true;
+  let inView = false;
 
   const render = (): void => {
     curX += (targetX - curX) * 0.06;
     curY += (targetY - curY) * 0.06;
     glow.style.transform = `translate3d(${curX.toFixed(1)}px, ${curY.toFixed(1)}px, 0)`;
-    raf = requestAnimationFrame(render);
+    // Stop the loop as soon as the glow has settled — no continuous work.
+    if (Math.abs(targetX - curX) > 0.5 || Math.abs(targetY - curY) > 0.5) {
+      raf = requestAnimationFrame(render);
+    } else {
+      raf = 0;
+    }
   };
 
-  hero.addEventListener(
-    'pointermove',
-    (e: PointerEvent) => {
-      const rect = hero.getBoundingClientRect();
-      targetX = e.clientX - rect.left;
-      targetY = e.clientY - rect.top;
-      glow.classList.add('is-active');
-    },
-    { passive: true },
-  );
+  const start = (): void => {
+    if (inView && !raf) raf = requestAnimationFrame(render);
+  };
+
+  const onMove = (e: PointerEvent): void => {
+    const rect = block.getBoundingClientRect();
+    targetX = e.clientX - rect.left;
+    targetY = e.clientY - rect.top;
+    glow.classList.add('is-active');
+    start();
+  };
+
+  const onLeave = (): void => {
+    glow.classList.remove('is-active');
+    if (raf) {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    }
+  };
+
+  block.addEventListener('pointermove', onMove, { passive: true });
+  block.addEventListener('pointerleave', onLeave, { passive: true });
 
   const io = new IntersectionObserver(
     (entries) => {
       inView = entries[0].isIntersecting;
-      if (inView && !raf) raf = requestAnimationFrame(render);
       if (!inView && raf) {
         cancelAnimationFrame(raf);
         raf = 0;
       }
+      if (inView && glow.classList.contains('is-active') && !raf) start();
     },
     { threshold: 0 },
   );
-  io.observe(hero);
+  io.observe(block);
+}
 
-  if (inView) raf = requestAnimationFrame(render);
+function initPointerGlows(): void {
+  // Touch / coarse-pointer devices: the mouse-follow feature is fully off —
+  // no listeners are attached and no RAF loop ever runs.
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!finePointer || prefersReduced) return;
+
+  document.querySelectorAll<HTMLElement>('[data-pointer-glow]').forEach((block) => {
+    const glow = block.querySelector<HTMLElement>('.pointer-glow, .hero__pointer-glow');
+    if (glow) initPointerGlow(block, glow);
+  });
 }
 
 // ── Connecting Routes — scroll-linked draw + travelling pulse ──
@@ -321,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLangSwitch();
   initHeroTitle();
   initHeroFigure();
-  initHeroPointerGlow();
+  initPointerGlows();
   initReveal();
   initMobileMenu();
   initHeaderScroll();

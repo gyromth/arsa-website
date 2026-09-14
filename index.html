@@ -78,13 +78,14 @@
       <!-- ═══════════════════════════════════════════
            HERO — Dark, cinematic, human-centered
            ═══════════════════════════════════════════ -->
-      <section class="hero" id="hero">
+      <section class="hero" id="hero" data-pointer-glow>
         <!-- Animated gradient blobs -->
         <div class="hero__blobs" aria-hidden="true">
           <div class="hero__blob hero__blob--1"></div>
           <div class="hero__blob hero__blob--2"></div>
           <div class="hero__blob hero__blob--3"></div>
           <div class="hero__blob hero__blob--4"></div>
+          <div class="hero__blob hero__blob--5"></div>
           <div class="hero__pointer-glow"></div>
         </div>
 
@@ -149,13 +150,10 @@
         </div>
 
         <a href="#about" class="hero__scroll" aria-label="Scroll to content" data-i18n-attr="a11y.scroll:aria-label">
-          <span class="hero__scroll-text" data-i18n="hero.scroll">Scroll</span>
-          <span class="hero__scroll-icon" aria-hidden="true">
-            <span class="hero__scroll-line"></span>
-            <svg class="hero__scroll-arrow" width="16" height="9" viewBox="0 0 16 9" fill="none">
-              <path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
+          <svg class="hero__scroll-icon" width="18" height="46" viewBox="0 0 18 46" fill="none" aria-hidden="true" focusable="false">
+            <path class="hero__scroll-line" d="M9 2 V31" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path class="hero__scroll-arrow" d="M3 24 L9 32 L15 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </a>
       </section>
 
@@ -180,7 +178,8 @@
       <!-- ═══════════════════════════════════════════
            SERVICES — Dark, interactive rows
            ═══════════════════════════════════════════ -->
-      <section class="services section" id="services">
+      <section class="services section" id="services" data-pointer-glow>
+        <div class="pointer-glow" aria-hidden="true"></div>
         <div class="container">
           <div class="section__header reveal">
             <span class="section-label" data-i18n="services.label">Services</span>
@@ -268,7 +267,8 @@
       <!-- ═══════════════════════════════════════════
            CTA — Dark, dramatic
            ═══════════════════════════════════════════ -->
-      <section class="cta section" id="contact">
+      <section class="cta section" id="contact" data-pointer-glow>
+        <div class="pointer-glow" aria-hidden="true"></div>
         <div class="cta__blob" aria-hidden="true"></div>
         <div class="cta__grain" aria-hidden="true"></div>
         <div class="container">

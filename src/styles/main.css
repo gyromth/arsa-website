@@ -204,14 +204,26 @@ html.html--booting body { visibility: hidden; }
 @media (min-width: 768px) { .header__cta { display: inline-flex; } }
 
 /* Language switch */
-.lang-switch { display: flex; border: 1px solid var(--border-strong); border-radius: 6px; overflow: hidden; }
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  overflow: hidden;
+}
 
 .lang-switch__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--ff-display);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  padding: 0.4em 0.65em;
+  min-width: 2.3rem;
+  height: 2.3rem;
+  padding: 0 0.75rem;
   border: none;
   background: transparent;
   color: rgba(245, 246, 248, 0.55);
@@ -229,7 +241,12 @@ html.html--booting body { visibility: hidden; }
 .lang-switch--footer .lang-switch__btn { color: var(--ink-3); }
 .lang-switch--footer .lang-switch__btn--active { background: var(--accent); color: #fff; }
 
-.mobile-nav__lang { padding: 0.75rem 0; border-bottom: 1px solid var(--border-dark); }
+.mobile-nav__lang {
+  display: flex;
+  justify-content: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border-dark);
+}
 
 /* Burger */
 .header__burger {
@@ -335,14 +352,14 @@ html.html--booting body { visibility: hidden; }
    HERO — Dark, cinematic, human-centered
    ══════════════════════════════════════════════ */
 .hero {
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height: calc(100dvh - 3rem);
+  min-height: calc(100vh - 3rem);
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
   background: var(--black);
-  padding: calc(var(--header-h) + 1rem) 0 2.5rem;
+  padding: calc(var(--header-h) + 1rem) 0 3.5rem;
 }
 
 /* Animated gradient blobs — calm "living light" */
@@ -356,91 +373,122 @@ html.html--booting body { visibility: hidden; }
 .hero__blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(90px);
   will-change: transform, opacity;
 }
 
 .hero__blob--1 {
-  width: 640px;
-  height: 640px;
-  background: radial-gradient(circle, var(--accent) 0%, transparent 68%);
-  top: 2%;
-  right: 6%;
-  opacity: 0.5;
-  animation: blobA 16s ease-in-out infinite;
+  width: 760px;
+  height: 760px;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 66%);
+  top: -8%;
+  right: -6%;
+  opacity: 0.6;
+  animation: blobA 18s ease-in-out infinite;
 }
 
 .hero__blob--2 {
-  width: 460px;
-  height: 460px;
-  background: radial-gradient(circle, var(--steel) 0%, transparent 68%);
-  bottom: 8%;
-  left: 2%;
-  opacity: 0.3;
-  animation: blobB 21s ease-in-out infinite;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, var(--steel) 0%, transparent 66%);
+  bottom: -12%;
+  left: -4%;
+  opacity: 0.42;
+  animation: blobB 24s ease-in-out infinite;
 }
 
 .hero__blob--3 {
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle, var(--accent) 0%, transparent 66%);
-  top: 42%;
-  left: 40%;
-  opacity: 0.34;
-  animation: blobC 13s ease-in-out infinite;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 64%);
+  top: 24%;
+  left: 30%;
+  opacity: 0.32;
+  animation: blobC 14s ease-in-out infinite;
 }
 
 .hero__blob--4 {
-  width: 280px;
-  height: 280px;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.9) 0%, transparent 68%);
-  top: 16%;
-  left: 16%;
-  opacity: 0.2;
-  animation: blobD 19s ease-in-out infinite;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.9) 0%, transparent 64%);
+  bottom: 4%;
+  right: 6%;
+  opacity: 0.36;
+  animation: blobD 20s ease-in-out infinite;
+}
+
+.hero__blob--5 {
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 66%);
+  top: 44%;
+  left: -6%;
+  opacity: 0.3;
+  animation: blobE 17s ease-in-out infinite;
 }
 
 @keyframes blobA {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.42; }
-  33% { transform: translate(-48px, 34px) scale(1.12); opacity: 0.56; }
-  66% { transform: translate(32px, -26px) scale(0.92); opacity: 0.38; }
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  33% { transform: translate(-62px, 44px) scale(1.14); opacity: 0.66; }
+  66% { transform: translate(42px, -34px) scale(0.9); opacity: 0.44; }
 }
 
 @keyframes blobB {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.24; }
-  50% { transform: translate(56px, -36px) scale(1.16); opacity: 0.36; }
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.34; }
+  50% { transform: translate(72px, -46px) scale(1.18); opacity: 0.48; }
 }
 
 @keyframes blobC {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.28; }
-  50% { transform: translate(-36px, 28px) scale(1.18); opacity: 0.44; }
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.26; }
+  50% { transform: translate(-48px, 38px) scale(1.22); opacity: 0.42; }
 }
 
 @keyframes blobD {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.16; }
-  50% { transform: translate(44px, 32px) scale(1.2); opacity: 0.3; }
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.28; }
+  50% { transform: translate(58px, 42px) scale(1.22); opacity: 0.44; }
 }
 
-/* Soft cursor-follow light (desktop, fine pointer only) */
+@keyframes blobE {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.22; }
+  50% { transform: translate(-42px, -32px) scale(1.16); opacity: 0.34; }
+}
+
+/* Soft cursor-follow light — reusable across dark blocks */
+.pointer-glow,
 .hero__pointer-glow {
   position: absolute;
   top: 0;
   left: 0;
-  width: 520px;
-  height: 520px;
-  margin: -260px 0 0 -260px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.45) 0%, transparent 65%);
   filter: blur(70px);
   opacity: 0;
   transition: opacity 700ms var(--ease);
   will-change: transform;
   pointer-events: none;
+  z-index: 0;
 }
 
+.pointer-glow {
+  width: 440px;
+  height: 440px;
+  margin: -220px 0 0 -220px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.3) 0%, transparent 65%);
+}
+
+.pointer-glow.is-active,
 .hero__pointer-glow.is-active { opacity: 1; }
 
+/* Hero variant is slightly brighter and cobalt-tinted so it stays distinct */
+.hero__pointer-glow {
+  width: 560px;
+  height: 560px;
+  margin: -280px 0 0 -280px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.5) 0%, transparent 62%);
+}
+
+/* Mouse-only: fully removed on touch / coarse-pointer devices */
 @media (hover: none), (pointer: coarse) {
+  .pointer-glow,
   .hero__pointer-glow { display: none; }
 }
 
@@ -594,57 +642,35 @@ html.html--booting body { visibility: hidden; }
   letter-spacing: 0.02em;
 }
 
-/* ── Scroll indicator — visible + accessible ── */
+/* ── Scroll indicator — cohesive line flowing into arrow ── */
 .hero__scroll {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 1.75rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.55rem;
   z-index: 6;
-  padding: 0.5rem 0.75rem;
-  border-radius: 10px;
-  color: var(--sand);
+  padding: 0.4rem 0.5rem;
+  border-radius: 999px;
+  color: var(--accent);
   transition: color 200ms var(--ease), background 200ms var(--ease);
 }
 
 .hero__scroll:hover,
 .hero__scroll:focus-visible {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.07);
+  color: var(--steel);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.hero__scroll-text {
-  font-family: var(--ff-display);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: inherit;
-}
-
-/* Line + arrow move together — never scaled or faded to transparent */
+/* Single SVG: the line and the chevron are one cohesive mark */
 .hero__scroll-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  color: var(--accent);
-  animation: scrollNudge 2.4s ease-in-out infinite;
-}
-
-.hero__scroll-line {
-  width: 2px;
-  height: 30px;
-  border-radius: 2px;
-  background: var(--accent);
-}
-
-.hero__scroll-arrow {
   display: block;
+  animation: scrollNudge 2.6s ease-in-out infinite;
+}
+
+.hero__scroll-line,
+.hero__scroll-arrow {
+  color: inherit;
 }
 
 @keyframes scrollNudge {
@@ -697,6 +723,13 @@ html.html--booting body { visibility: hidden; }
 .services {
   background: var(--dark);
   color: var(--sand);
+  position: relative;
+  overflow: hidden;
+}
+
+.services .container {
+  position: relative;
+  z-index: 1;
 }
 
 .services__list { display: flex; flex-direction: column; }
@@ -1036,71 +1069,87 @@ html.html--booting body { visibility: hidden; }
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    padding: calc(var(--header-h) + 0.5rem) 0 1rem;
+    padding: calc(var(--header-h) + 0.5rem) 0 1.25rem;
   }
 
-  .hero__container { gap: 1.1rem; }
+  /* Flatten content so its children can be ordered in the mobile stack */
+  .hero__content { display: contents; }
 
-  /* Worker graphic sits directly under the CTAs, compact and centred */
+  .hero__container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+    align-items: stretch;
+  }
+
+  .hero__meta { order: 1; }
+  .hero__title { order: 2; }
+  .hero__subtitle { order: 3; }
+
+  /* CTA group sits low, forming the visual anchor of the lower Hero */
+  .hero__actions { order: 4; justify-content: center; }
+  .hero__actions .btn--lg { padding: 0.85em 1.7em; font-size: 0.82rem; }
+
+  /* Worker + statistic share one compact centred strip below the CTAs */
   .hero__visual {
+    order: 5;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 0.85rem;
-    margin-top: 0.15rem;
+    justify-content: center;
+    gap: 1rem;
   }
 
   .hero__figure {
-    max-width: 132px;
+    max-width: 104px;
     /* scale-only reveal on mobile — no downward shift into the label */
     transform: translateY(0) scale(0.96);
   }
-
   .hero__figure.visible { transform: translateY(0) scale(1); }
 
   .hero__float-label {
     position: static;
-    align-self: center;
     align-items: center;
-    padding: 0.5rem 0.95rem;
-    background: rgba(37, 99, 235, 0.12);
-    border-color: rgba(37, 99, 235, 0.26);
+    padding: 0.45rem 0.9rem;
+    background: rgba(37, 99, 235, 0.14);
+    border: none;
+    border-radius: 999px;
   }
-
-  .hero__float-num { font-size: 1.25rem; }
-  .hero__float-text { font-size: 0.72rem; }
+  .hero__float-num { font-size: 1.2rem; }
+  .hero__float-text { font-size: 0.72rem; line-height: 1; }
 
   .hero__title {
-    font-size: clamp(1.7rem, 1.45rem + 1.3vw, 2.2rem);
+    font-size: clamp(1.6rem, 1.4rem + 1.2vw, 2rem);
     margin-bottom: 1rem;
   }
 
   .hero__subtitle { margin-bottom: 1.25rem; }
 
-  /* Scroll indicator joins normal flow — separate zone, pushed to hero bottom */
-  .hero__scroll {
-    position: static;
-    transform: none;
-    align-self: center;
-    margin-top: auto;
-    padding-top: 1.25rem;
-  }
+  /* Scroll indicator is not needed on touch — the About section peeks below */
+  .hero__scroll { display: none; }
+
+  /* Lighter ambient motion on mobile: fewer layers, lower blur/opacity */
+  .hero__blob { filter: blur(60px); }
+  .hero__blob--3,
+  .hero__blob--5 { display: none; }
+  .hero__blob--1 { opacity: 0.45; }
+  .hero__blob--2 { opacity: 0.3; }
+  .hero__blob--4 { opacity: 0.28; }
 }
 
 /* Extra-short screens: shrink the visual further */
 @media (max-width: 959px) and (max-height: 700px) {
-  .hero { padding-top: calc(var(--header-h) + 0.1rem); padding-bottom: 0.35rem; }
-  .hero__container { gap: 0.4rem; }
-  .hero__visual { gap: 0.35rem; }
-  .hero__figure { max-width: 84px; }
-  .hero__title { font-size: 1.28rem; margin-bottom: 0.5rem; }
-  .hero__subtitle { font-size: 0.82rem; line-height: 1.45; margin-bottom: 0.6rem; }
+  .hero { padding-top: calc(var(--header-h) + 0.1rem); padding-bottom: 0.5rem; }
+  .hero__container { gap: 0.5rem; }
+  .hero__visual { gap: 0.7rem; }
+  .hero__figure { max-width: 88px; }
+  .hero__title { font-size: 1.3rem; margin-bottom: 0.6rem; }
+  .hero__subtitle { font-size: 0.85rem; line-height: 1.5; margin-bottom: 0.7rem; }
   .hero__meta { margin-bottom: 0.5rem; }
-  .hero__float-label { padding: 0.35rem 0.7rem; }
-  .hero__float-num { font-size: 1rem; }
+  .hero__float-label { padding: 0.38rem 0.75rem; }
+  .hero__float-num { font-size: 1.05rem; }
   .hero__float-text { font-size: 0.66rem; }
-  .hero__scroll { padding-top: 0.35rem; }
-  .hero__scroll-line { height: 20px; }
+  .hero__actions .btn--lg { padding: 0.75em 1.5em; font-size: 0.78rem; }
 }
 
 /* ── Small-width padding safety ─────────────── */
