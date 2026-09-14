@@ -1,6 +1,6 @@
 /* =============================================
    ARSA International — Premium B2B Design
-   Valar-inspired · Warm · Confident
+   Elevated visual impact · Cinematic hero
    ============================================= */
 
 :root {
@@ -21,7 +21,8 @@
   --ff: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --ff-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
 
-  --fs-hero: clamp(2.8rem, 1.6rem + 5vw, 5.8rem);
+  --fs-hero: clamp(3rem, 1.8rem + 5.5vw, 6.5rem);
+  --fs-hero-mobile: clamp(2.6rem, 2.2rem + 3vw, 3.8rem);
   --fs-h2: clamp(2rem, 1.4rem + 2.5vw, 3.5rem);
   --fs-h3: clamp(1.2rem, 1rem + 0.6vw, 1.5rem);
   --fs-body: clamp(1rem, 0.95rem + 0.2vw, 1.1rem);
@@ -31,12 +32,12 @@
 
   --gap: clamp(5rem, 4rem + 4vw, 8rem);
   --gap-sm: clamp(2.5rem, 2rem + 2vw, 4rem);
-  --container: 1120px;
+  --container: 1200px;
   --header-h: 72px;
 
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 /* ── Reset ──────────────────────────────────── */
@@ -64,7 +65,21 @@ img, svg { display: block; max-width: 100%; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal { opacity: 1 !important; transform: none !important; }
+  .reveal, .hero__title, .hero__visual-frame, .hero__stat,
+  .hero__mesh, .traj-line, .traj-dot, .hero__coord { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── Grain overlay ──────────────────────────── */
+.hero__grain,
+.cta__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  mix-blend-mode: overlay;
 }
 
 /* ── Layout ─────────────────────────────────── */
@@ -233,7 +248,7 @@ img, svg { display: block; max-width: 100%; }
   color: #fff;
   padding: 0.9em 2.2em;
 }
-.btn--accent:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn--accent:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(139,108,90,0.25); }
 
 .btn--dark {
   background: var(--ink);
@@ -257,7 +272,11 @@ img, svg { display: block; max-width: 100%; }
 }
 .btn--ghost-light:hover { border-color: rgba(250,249,247,0.5); color: #fff; }
 
-/* ── Hero ───────────────────────────────────── */
+.btn--lg { padding: 1em 2.4em; font-size: var(--fs-small); }
+
+/* ══════════════════════════════════════════════
+   HERO — Cinematic, premium, memorable
+   ══════════════════════════════════════════════ */
 .hero {
   min-height: 100vh;
   min-height: 100dvh;
@@ -265,7 +284,7 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding: calc(var(--header-h) + 2rem) 0 3rem;
+  padding: calc(var(--header-h) + 1.5rem) 0 2rem;
 }
 
 .hero__container {
@@ -274,38 +293,77 @@ img, svg { display: block; max-width: 100%; }
   padding: 0 clamp(1.5rem, 1rem + 2.5vw, 3rem);
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2.5rem;
   align-items: center;
   width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 @media (min-width: 960px) {
   .hero__container {
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
   }
 }
 
 .hero__text { position: relative; z-index: 2; }
 
-.hero__eyebrow {
-  display: inline-block;
+/* Meta line */
+.hero__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero__meta-line {
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero__meta-label {
   font-size: var(--fs-label);
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 1.5rem;
 }
 
+/* Hero title — cinematic typography */
 .hero__title {
   font-family: var(--ff-display);
-  font-size: var(--fs-hero);
+  font-size: var(--fs-hero-mobile);
   font-weight: 500;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
   color: var(--ink);
   margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+@media (min-width: 960px) {
+  .hero__title { font-size: var(--fs-hero); }
+}
+
+.hero__title .title-line {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 1s var(--ease-out-expo);
+}
+
+.hero__title.animated .title-line {
+  transform: translateY(0);
+}
+
+.hero__title .title-line:nth-child(1) { transition-delay: 0.1s; }
+.hero__title .title-line:nth-child(2) { transition-delay: 0.25s; }
+.hero__title .title-line:nth-child(3) { transition-delay: 0.4s; }
+
+.hero__title .title-word--accent {
+  color: var(--accent);
+  font-style: italic;
 }
 
 .hero__subtitle {
@@ -313,45 +371,149 @@ img, svg { display: block; max-width: 100%; }
   color: var(--ink-2);
   max-width: 480px;
   line-height: 1.7;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
-/* Hero visual */
+.hero__actions { display: flex; gap: 1rem; align-items: center; }
+
+/* ── Hero Visual — Premium gradient mesh ────── */
 .hero__visual {
   position: relative;
-  display: none;
 }
 
-@media (min-width: 960px) {
-  .hero__visual { display: block; }
-}
-
-.hero__image {
+.hero__visual-frame {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 5;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px) scale(0.96);
+  transition: opacity 1.2s var(--ease-out-expo) 0.3s, transform 1.2s var(--ease-out-expo) 0.3s;
 }
 
-.hero__image-gradient {
+.hero__visual-frame.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (max-width: 959px) {
+  .hero__visual-frame {
+    aspect-ratio: 16 / 10;
+    max-height: 280px;
+    border-radius: 16px;
+  }
+}
+
+.hero__mesh {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, #2d2926 0%, #1a1816 40%, #3d3530 70%, #2d2926 100%);
+    radial-gradient(ellipse 80% 60% at 30% 40%, rgba(139,108,90,0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 70% 60%, rgba(45,41,38,0.6) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 30%, rgba(61,53,48,0.5) 0%, transparent 50%),
+    linear-gradient(145deg, #2d2926 0%, #1a1816 35%, #3d3530 65%, #2d2926 100%);
 }
 
-.hero__image-lines {
+.hero__trajectories {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
 
+.traj-line {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  transition: stroke-dashoffset 2.5s var(--ease-out-expo);
+}
+
+.hero__visual-frame.visible .traj-line {
+  stroke-dashoffset: 0;
+}
+
+.traj-line:nth-child(2) { transition-delay: 0.3s; }
+.traj-line:nth-child(3) { transition-delay: 0.6s; }
+
+.traj-dot {
+  opacity: 0;
+  transition: opacity 1s var(--ease-out);
+}
+
+.hero__visual-frame.visible .traj-dot {
+  opacity: 1;
+}
+
+.hero__visual-frame.visible .traj-dot:nth-child(4) { transition-delay: 1s; }
+.hero__visual-frame.visible .traj-dot:nth-child(5) { transition-delay: 1.3s; }
+.hero__visual-frame.visible .traj-dot:nth-child(6) { transition-delay: 1.6s; }
+.hero__visual-frame.visible .traj-dot:nth-child(7) { transition-delay: 1.9s; }
+.hero__visual-frame.visible .traj-dot:nth-child(8) { transition-delay: 2.1s; }
+
+/* Coordinate labels */
+.hero__coords {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero__coord {
+  position: absolute;
+  font-family: var(--ff);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: rgba(139,108,90,0.5);
+  opacity: 0;
+  transition: opacity 1s var(--ease-out) 1.5s;
+}
+
+.hero__visual-frame.visible .hero__coord { opacity: 1; }
+
+.hero__coord--tl { top: 1.5rem; left: 1.5rem; }
+.hero__coord--br { bottom: 1.5rem; right: 1.5rem; }
+
+@media (max-width: 959px) {
+  .hero__coord { display: none; }
+}
+
+/* Stat strip */
+.hero__stat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding: 1rem 0;
+}
+
+@media (min-width: 960px) {
+  .hero__stat { justify-content: flex-end; padding-right: 1rem; }
+}
+
+.hero__stat-num {
+  font-family: var(--ff-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.hero__stat-label {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+}
+
+.hero__stat-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border-strong);
+}
+
 /* Scroll indicator */
 .hero__scroll {
   position: absolute;
-  bottom: 2rem;
+  bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -361,16 +523,16 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .hero__scroll-text {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
 
 .hero__scroll-line {
   width: 1px;
-  height: 32px;
+  height: 28px;
   background: linear-gradient(to bottom, var(--accent), transparent);
   animation: scrollPulse 2s ease-in-out infinite;
 }
@@ -594,11 +756,13 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ── CTA (dark) ─────────────────────────────── */
-.cta { background: var(--dark); }
+.cta { background: var(--dark); position: relative; overflow: hidden; }
 
 .cta__inner {
   text-align: center;
-  padding: clamp(3rem, 2rem + 4vw, 5rem) 0;
+  padding: clamp(4rem, 3rem + 4vw, 6rem) 0;
+  position: relative;
+  z-index: 2;
 }
 
 .cta__heading {
@@ -718,25 +882,3 @@ img, svg { display: block; max-width: 100%; }
 ::-webkit-scrollbar-track { background: var(--canvas); }
 ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--ink-3); }
-
-/* ── Hero line animation ────────────────────── */
-.hero-line-path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-}
-.hero-line-path.animated {
-  animation: drawLine 2.5s var(--ease-out) forwards;
-}
-@keyframes drawLine {
-  to { stroke-dashoffset: 0; }
-}
-
-.hero__image {
-  opacity: 0;
-  transform: translateY(20px) scale(0.98);
-  transition: opacity 1s var(--ease-out) 0.3s, transform 1s var(--ease-out) 0.3s;
-}
-.hero__image.visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}

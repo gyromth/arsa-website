@@ -3,7 +3,7 @@ import { translations, type Lang, type TranslationKey } from './i18n';
 
 /**
  * ARSA International — Main entry point
- * Premium B2B design — i18n, scroll reveals, mobile menu, header, hero image reveal.
+ * Premium B2B — i18n, cinematic hero, scroll reveals, mobile menu.
  */
 
 const STORAGE_KEY = 'arsa-lang';
@@ -140,44 +140,40 @@ function initHeaderScroll(): void {
   });
 }
 
-// ── Hero Image Reveal ──────────────────────────────────────
-function initHeroImage(): void {
+// ── Hero Title Animation ───────────────────────────────────
+function initHeroTitle(): void {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const image = document.querySelector('.hero__image');
-  if (!image) return;
+  const title = document.querySelector('.hero__title');
+  if (!title) return;
 
   if (prefersReduced) {
-    image.classList.add('visible');
+    title.classList.add('animated');
     return;
   }
 
-  setTimeout(() => image.classList.add('visible'), 200);
+  // Wrap each line in a span for animation
+  const html = title.innerHTML;
+  const lines = html.split('<br>');
+  title.innerHTML = lines
+    .map((line) => `<span class="title-line">${line}</span>`)
+    .join('');
+
+  // Trigger animation after a short delay
+  setTimeout(() => title.classList.add('animated'), 100);
 }
 
-// ── Hero Line Animation ────────────────────────────────────
-function initHeroLines(): void {
+// ── Hero Visual Reveal ─────────────────────────────────────
+function initHeroVisual(): void {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const frame = document.querySelector('.hero__visual-frame');
+  if (!frame) return;
+
   if (prefersReduced) {
-    document.querySelectorAll('.hero-line-path').forEach((el) => el.classList.add('animated'));
+    frame.classList.add('visible');
     return;
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          document.querySelectorAll('.hero-line-path').forEach((path, i) => {
-            setTimeout(() => path.classList.add('animated'), i * 500);
-          });
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2 },
-  );
-
-  const hero = document.getElementById('hero');
-  if (hero) observer.observe(hero);
+  setTimeout(() => frame.classList.add('visible'), 400);
 }
 
 // ── Smooth Anchor ──────────────────────────────────────────
@@ -198,10 +194,10 @@ function initSmoothAnchors(): void {
 // ── Init ───────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initLangSwitch();
+  initHeroTitle();
+  initHeroVisual();
   initReveal();
   initMobileMenu();
   initHeaderScroll();
-  initHeroImage();
-  initHeroLines();
   initSmoothAnchors();
 });

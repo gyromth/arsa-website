@@ -53,26 +53,48 @@
     <main>
       <!-- Hero -->
       <section class="hero" id="hero">
+        <div class="hero__grain" aria-hidden="true"></div>
         <div class="hero__container">
           <div class="hero__text">
-            <span class="hero__eyebrow reveal" data-i18n="hero.eyebrow">International Recruitment</span>
-            <h1 class="hero__title reveal" data-i18n="hero.title">People who help<br>your business move forward</h1>
+            <div class="hero__meta reveal">
+              <span class="hero__meta-line"></span>
+              <span class="hero__meta-label" data-i18n="hero.eyebrow">International Recruitment</span>
+            </div>
+            <h1 class="hero__title" data-i18n="hero.title">People who help<br>your business<br>move forward</h1>
             <p class="hero__subtitle reveal" data-i18n="hero.subtitle">We connect companies with skilled professionals from around the world — reliably, transparently, and with full support at every stage.</p>
-            <div class="reveal">
-              <a href="#contact" class="btn btn--accent" data-i18n="hero.cta">Let's talk</a>
+            <div class="hero__actions reveal">
+              <a href="#contact" class="btn btn--accent btn--lg" data-i18n="hero.cta">Let's talk</a>
             </div>
           </div>
-          <div class="hero__visual reveal">
-            <div class="hero__image">
-              <div class="hero__image-gradient"></div>
-              <svg class="hero__image-lines" viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 400 C100 350 200 450 300 400 S500 350 600 400" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-                <path d="M0 300 C150 280 250 380 400 320 S550 280 600 300" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/>
-                <path d="M0 500 C100 480 300 520 450 490 S550 470 600 500" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>
-                <circle cx="300" cy="400" r="4" fill="rgba(139,108,90,0.6)"/>
-                <circle cx="150" cy="320" r="2.5" fill="rgba(139,108,90,0.4)"/>
-                <circle cx="450" cy="350" r="3" fill="rgba(139,108,90,0.5)"/>
+          <div class="hero__visual">
+            <div class="hero__visual-frame">
+              <!-- Gradient mesh — premium visual -->
+              <div class="hero__mesh"></div>
+              <!-- Animated trajectory lines -->
+              <svg class="hero__trajectories" viewBox="0 0 500 600" fill="none" preserveAspectRatio="xMidYMid slice">
+                <path class="traj-line" d="M-20 300 C80 260 160 340 250 300 S380 260 500 300" stroke="rgba(139,108,90,0.35)" stroke-width="1.2" stroke-linecap="round"/>
+                <path class="traj-line" d="M-10 200 C100 180 180 260 300 220 S420 180 520 200" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" stroke-linecap="round"/>
+                <path class="traj-line" d="M-30 420 C60 400 200 440 320 410 S440 390 530 420" stroke="rgba(139,108,90,0.2)" stroke-width="0.6" stroke-linecap="round"/>
+                <!-- Animated dots on trajectories -->
+                <circle class="traj-dot" cx="250" cy="300" r="4" fill="rgba(139,108,90,0.7)"/>
+                <circle class="traj-dot" cx="120" cy="270" r="2.5" fill="rgba(139,108,90,0.4)"/>
+                <circle class="traj-dot" cx="380" cy="280" r="3" fill="rgba(139,108,90,0.55)"/>
+                <circle class="traj-dot" cx="80" cy="410" r="2" fill="rgba(139,108,90,0.3)"/>
+                <circle class="traj-dot" cx="420" cy="400" r="2.5" fill="rgba(139,108,90,0.35)"/>
               </svg>
+              <!-- Coordinate labels — global feel -->
+              <div class="hero__coords" aria-hidden="true">
+                <span class="hero__coord hero__coord--tl">51.5°N</span>
+                <span class="hero__coord hero__coord--br">28.6°E</span>
+              </div>
+            </div>
+            <!-- Stat strip -->
+            <div class="hero__stat reveal">
+              <span class="hero__stat-num">5+</span>
+              <span class="hero__stat-label">markets</span>
+              <span class="hero__stat-divider"></span>
+              <span class="hero__stat-num">10+</span>
+              <span class="hero__stat-label">industries</span>
             </div>
           </div>
         </div>
@@ -178,16 +200,17 @@
 
       <!-- CTA — dark -->
       <section class="cta section" id="contact">
+        <div class="cta__grain" aria-hidden="true"></div>
         <div class="container">
           <div class="cta__inner reveal">
             <h2 class="cta__heading" data-i18n="cta.heading">Ready to discuss<br>your staffing needs?</h2>
             <p class="cta__text" data-i18n="cta.text">Tell us what you need — we'll propose a solution and outline the timeline.</p>
             <div class="cta__actions">
-              <a href="https://t.me/YOUR_TELEGRAM_HANDLE" class="btn btn--light" target="_blank" rel="noopener noreferrer">
+              <a href="https://t.me/YOUR_TELEGRAM_HANDLE" class="btn btn--light btn--lg" target="_blank" rel="noopener noreferrer">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
                 <span data-i18n="cta.telegram">Write to Telegram</span>
               </a>
-              <a href="mailto:info@arsa-international.com" class="btn btn--ghost-light" data-i18n="cta.email">info@arsa-international.com</a>
+              <a href="mailto:info@arsa-international.com" class="btn btn--ghost-light btn--lg" data-i18n="cta.email">info@arsa-international.com</a>
             </div>
           </div>
         </div>
