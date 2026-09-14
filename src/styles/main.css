@@ -890,6 +890,7 @@ html.html--booting body { visibility: hidden; }
 }
 
 .globe__world {
+  transform-box: view-box;
   transform-origin: 300px 300px;
 }
 

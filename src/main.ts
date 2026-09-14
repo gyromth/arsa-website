@@ -333,7 +333,7 @@ function initGlobe(): void {
   const draw = (p: number): void => {
     // Globe rotation follows scroll (forward / reverse).
     const rotation = -22 + 44 * p;
-    world.setAttribute('transform', `rotate(${rotation.toFixed(2)} 300 300)`);
+    world.style.transform = `rotate(${rotation.toFixed(2)}deg)`;
 
     const total = routes.length;
     const idx = Math.min(total - 1, Math.floor(p * total));
@@ -376,7 +376,7 @@ function initGlobe(): void {
       r.style.opacity = i < 3 ? String(0.75 - i * 0.2) : '0';
     });
     markers.forEach((m) => { m.style.opacity = '0'; });
-    world.setAttribute('transform', 'rotate(-8 300 300)');
+    world.style.transform = 'rotate(-8deg)';
     return;
   }
 
