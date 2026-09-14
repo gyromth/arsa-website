@@ -31,6 +31,8 @@ export const translations = {
     'hero.cta.secondary': 'Learn more',
     'hero.stat.num': '20+',
     'hero.stat.label': 'nationalities',
+    'hero.globe.hint': 'Drag to explore',
+    'hero.globe.aria': 'Interactive globe — drag to rotate',
     'hero.scroll': 'Scroll',
 
     'about.label': 'ARSA International',
@@ -103,6 +105,8 @@ export const translations = {
     'hero.cta.secondary': 'Узнать больше',
     'hero.stat.num': '20+',
     'hero.stat.label': 'национальностей',
+    'hero.globe.hint': 'Потяните, чтобы вращать',
+    'hero.globe.aria': 'Интерактивный глобус — потяните, чтобы вращать',
     'hero.scroll': 'Вниз',
 
     'about.label': 'ARSA International',

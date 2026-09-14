@@ -1,6 +1,7 @@
 import './styles/main.css';
 import { translations, type Lang, type TranslationKey } from './i18n';
 import { config } from './config';
+import { initHeroGlobe } from './hero-globe';
 
 /**
  * ARSA International — Main entry point
@@ -231,7 +232,7 @@ function initHeaderScroll(): void {
 // ── Hero Figure Reveal ─────────────────────────────────────
 function initHeroFigure(): void {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const figure = document.querySelector('.hero__figure');
+  const figure = document.querySelector('.hero-globe-wrap');
   if (!figure) return;
   if (prefersReduced) {
     figure.classList.add('visible');
@@ -435,6 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
   applySiteUrl();
   startTypewriter();
   initHeroFigure();
+  initHeroGlobe();
   initPointerGlows();
   initReveal();
   initMobileMenu();
